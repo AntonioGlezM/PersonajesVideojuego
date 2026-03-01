@@ -1,13 +1,15 @@
 package com.personajesvideojuegos.modelo.clases;
 
-public abstract class ClaseHalfCaster {
+import java.util.ArrayList;
+
+public abstract class ClaseHalfCaster implements LanzadorConjuros {
 
   static final int[][] espaciosConjurosPorNivel = {
-      { 0, 0, 0, 0 },
-      { 2, 0, 0, 0 },
-      { 3, 0, 0, 0 },
-      { 3, 0, 0, 0 },
-      { 3, 2, 0, 0 }
+      { 0, 0 },
+      { 2, 0 },
+      { 3, 0 },
+      { 3, 0 },
+      { 3, 2 }
   };
 
   ArrayList<Conjuro> listaConjurosConocidos = new ArrayList<>();
@@ -15,7 +17,4 @@ public abstract class ClaseHalfCaster {
   int[] conjurosConocidosPorNivel;
   int CD;
 
-  public void aprenderConjuro(Conjuro conjuroAAPrender) {
-    this.listaConjurosConocidos.add(conjuroAAPrender);
-  }
 }
