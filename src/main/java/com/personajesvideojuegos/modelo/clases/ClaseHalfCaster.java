@@ -2,6 +2,9 @@ package com.personajesvideojuegos.modelo.clases;
 
 import java.util.ArrayList;
 
+/**
+ * @author Gabriel Francisco Ruíz Bolaños
+ */
 public abstract class ClaseHalfCaster implements LanzadorConjuros {
 
   static final int[][] espaciosConjurosPorNivel = {
@@ -16,5 +19,9 @@ public abstract class ClaseHalfCaster implements LanzadorConjuros {
 
   int[] conjurosConocidosPorNivel;
   int CD;
+
+  public int aumentarLanzamientoConjuro(int puntuacion, int bonoCompetencia) {
+    return puntuacion + bonoCompetencia;
+  }
 
 }

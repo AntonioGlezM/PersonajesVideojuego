@@ -3,6 +3,9 @@ package com.personajesvideojuegos.modelo.clases;
 import com.personajesvideojuegos.modelo.Rasgo;
 import java.util.ArrayList;
 
+/**
+ * @author Gabriel Francisco Ruíz Bolaños
+ */
 public abstract class Clase implements Nivelado {
   private static ArrayList<Rasgo>[] rasgosPorNivel;
   int nivelClase;
