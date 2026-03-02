@@ -1,5 +1,6 @@
 package com.personajesvideojuegos.modelo.clases;
 
+import com.personajesvideojuegos.modelo.Conjuro;
 import java.util.ArrayList;
 
 /**

@@ -1,6 +1,7 @@
 package com.personajesvideojuegos.modelo.clases;
 
 import java.util.ArrayList;
+import com.personajesvideojuegos.modelo.Conjuro;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños
