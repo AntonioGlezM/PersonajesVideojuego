@@ -3,6 +3,10 @@ package com.personajesvideojuegos.modelo;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @author Antonio González Martel
+ */
+
 public abstract class Personaje {
 
     // ID único obligatorio
