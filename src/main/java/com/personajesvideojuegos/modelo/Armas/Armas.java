@@ -1,5 +1,10 @@
 package com.personajesvideojuegos.modelo.Armas;
 
+/**
+ * @author Antonio González Martel
+ */
+
+// Clase guía para la creación de armas
 public abstract class Armas {
 
     protected String nombre;
