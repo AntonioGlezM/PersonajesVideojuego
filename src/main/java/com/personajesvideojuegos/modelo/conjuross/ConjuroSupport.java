@@ -1,19 +1,14 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
-import com.personajesvideojuegos.modelo.Conjuros;
 /**
  * @author Alonso J rodríguez Betancor*/
 
-public abstract class ConjuroSupport extends Conjuros {
-    private int vida;
-    private int fuerza;
-    private int defensa;
+public abstract class ConjuroSupport extends Conjuro {
+    TipoConjuroSupport tipoConjuro;
 
-    public ConjuroSupport (int Vida, int Fuerza, int Defensa, int id, String nombre, String descripcion){
+    public ConjuroSupport (int valor, int id, String nombre, String descripcion, TipoConjuroSupport tipoConjuro){
 
-        super(id, nombre, descripcion);
-        this.vida = Vida;
-        this.fuerza= Fuerza;
-        this.defensa= Defensa;
+        super(valor, id, nombre, descripcion);
+        this.tipoConjuro = tipoConjuro;
     }
 }

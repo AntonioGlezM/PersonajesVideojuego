@@ -23,11 +23,10 @@ public abstract class Personaje {
     private final String id;
 
     private String nombre;
-    private int nivel;
     private int salud;
     private int poderBase;
     private String raza;
-    private int claseArmadura;
+    private int valorArmadura;
 
     private Armas armaEquipada;
 
@@ -36,11 +35,10 @@ public abstract class Personaje {
 
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
-        this.nivel = nivel;
         this.salud = salud;
         this.poderBase = poderBase;
         this.raza = raza;
-        this.claseArmadura = claseArmadura;
+        this.valorArmadura = claseArmadura;
     }
 
     // Getters
@@ -52,9 +50,6 @@ public abstract class Personaje {
         return nombre;
     }
 
-    public int getNivel() {
-        return nivel;
-    }
 
     public int getSalud() {
         return salud;
@@ -68,8 +63,8 @@ public abstract class Personaje {
         return raza;
     }
 
-    public int getClaseArmadura() {
-        return claseArmadura;
+    public int getValorArmadura() {
+        return valorArmadura;
     }
 
     public Armas getArmaEquipada() {
@@ -81,12 +76,12 @@ public abstract class Personaje {
         this.nombre = nombre;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
     public void setSalud(int salud) {
         this.salud = salud;
+    }
+
+    public void setValorArmadura(int valor){
+        this.valorArmadura = valor;
     }
 
     public void setPoderBase(int poderBase) {
@@ -100,7 +95,7 @@ public abstract class Personaje {
 
     public void recibirDanio(int danio) {
 
-        int danioFinal = danio - claseArmadura;
+        int danioFinal = danio - valorArmadura;
         if (danioFinal < 0)
             danioFinal = 0;
 
@@ -115,13 +110,6 @@ public abstract class Personaje {
         return salud > 0;
     }
 
-    public void subirNivel() {
-        nivel++;
-        poderBase += 2;
-        salud += 10;
-
-        System.out.println(nombre + " sube a nivel " + nivel);
-    }
 
     // Cada personaje define como ataca
     public abstract void atacar(Personaje objetivo);
@@ -139,10 +127,9 @@ public abstract class Personaje {
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nRol: " + getRol() +
-                "\nNivel: " + nivel +
                 "\nSalud: " + salud +
                 "\nPoder Base: " + poderBase +
-                "\nClase de Armadura: " + claseArmadura +
+                "\nClase de Armadura: " + valorArmadura +
                 "\nArma equipada: " +
                 (armaEquipada != null ? armaEquipada.getNombre() : "Ninguna") +
                 "\nEstado: " + (estaVivo() ? "VIVO" : "DERROTADO") +
@@ -151,6 +138,7 @@ public abstract class Personaje {
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null || getClass() != obj.getClass())

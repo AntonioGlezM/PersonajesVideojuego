@@ -18,10 +18,10 @@ public abstract class PersonajeFisico extends Personaje {
     private int fuerza;
 
     public PersonajeFisico(String nombre, int nivel, int salud, int poderBase,
-            String raza, int claseArmadura,
+            String raza,
             int fuerza) {
 
-        super(nombre, nivel, salud, poderBase, raza, claseArmadura);
+        super(nombre, nivel, salud, poderBase, raza, 0);
         this.fuerza = fuerza;
     }
 
