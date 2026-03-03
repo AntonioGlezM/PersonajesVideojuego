@@ -1,10 +1,10 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
-import com.personajesvideojuegos.modelo.Conjuros;
+import com.personajesvideojuegos.modelo.Conjuro;
 /**
  * @author Alonso J rodríguez Betancor*/
 
-public abstract class ConjuroSupport extends Conjuros {
+public abstract class ConjuroSupport extends Conjuro {
     private int vida;
     private int fuerza;
     private int defensa;
