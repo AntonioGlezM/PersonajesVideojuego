@@ -4,9 +4,9 @@ package com.personajesvideojuegos.modelo.Armas;
  * @author Antonio González Martel
  */
 
-public class Espada extends ArmaFisica {
+public class Martillo extends ArmaFisica {
 
-    public Espada(String nombre, int danioBase, CategoriaArma categoria) {
+    public Martillo(String nombre, int danioBase, CategoriaArma categoria) {
         super(nombre, danioBase, categoria);
     }
 }
