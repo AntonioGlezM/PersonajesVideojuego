@@ -16,6 +16,7 @@ public abstract class Personaje {
     private String nombre;
     private int nivel;
     private int salud;
+    private int PoderBase;
 
     // Constructor
     public Personaje(String nombre, int nivel, int salud) {
@@ -43,6 +44,10 @@ public abstract class Personaje {
         return salud;
     }
 
+    public int getPoderBase() {
+        return PoderBase;
+    }
+
     // Setters (no hay setter de id porque no debe cambiar)
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -56,6 +61,10 @@ public abstract class Personaje {
         this.salud = salud;
     }
 
+     public void setPoderBase(int PoderBase) {
+        this.PoderBase = PoderBase;
+    }
+
     // Método abstracto obligatorio.
     // Cada clase hija tendrá que definir cómo ataca.
     public abstract void atacar(Personaje objetivo);
@@ -66,7 +75,8 @@ public abstract class Personaje {
         return "ID: " + id +
                 " | Nombre: " + nombre +
                 " | Nivel: " + nivel +
-                " | Salud: " + salud;
+                " | Salud: " + salud +
+                " | Poder Base: " + PoderBase;
     }
 
     @Override
