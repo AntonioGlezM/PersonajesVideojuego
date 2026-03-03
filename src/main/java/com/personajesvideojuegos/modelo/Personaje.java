@@ -3,6 +3,7 @@ package com.personajesvideojuegos.modelo;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.personajesvideojuegos.modelo.Armadura.Armadura;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 
 /**
@@ -30,6 +31,7 @@ public abstract class Personaje {
     private int claseArmadura;
 
     private Armas armaEquipada;
+    private Armadura armaduraEquipada;
 
     public Personaje(String nombre, int nivel, int salud, int poderBase,
             String raza, int claseArmadura) {
@@ -76,6 +78,10 @@ public abstract class Personaje {
         return armaEquipada;
     }
 
+    public Armas getArmaduraEquipada() {
+        return armaduraEquipada;
+    }
+
     // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -96,6 +102,11 @@ public abstract class Personaje {
     public void equiparArma(Armas arma) {
         this.armaEquipada = arma;
         System.out.println(nombre + " ha equipado " + arma.getNombre());
+    }
+
+    public void equiparArmadura(Armadura armadura){
+        this.armaduraEquipada = armadura;
+        System.out.println(nombre + " ha equipado " + armadura.getNombre());
     }
 
     public void recibirDanio(int danio) {
@@ -145,6 +156,8 @@ public abstract class Personaje {
                 "\nClase de Armadura: " + claseArmadura +
                 "\nArma equipada: " +
                 (armaEquipada != null ? armaEquipada.getNombre() : "Ninguna") +
+                "\nArmadura equipada: " +
+                (armaduraEquipada != null ? armaduraEquipada.getNombre() : "Ninguna") +
                 "\nEstado: " + (estaVivo() ? "VIVO" : "DERROTADO") +
                 "\n===========================";
     }
