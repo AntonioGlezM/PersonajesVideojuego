@@ -3,28 +3,42 @@ package com.personajesvideojuegos.modelo;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.personajesvideojuegos.modelo.Armas.Armas;
+
+/**
+ * Clase abstracta inspirada en Dungeons & Dragons.
+ * Define atributos comunes a TODOS los personajes.
+ * 
+ * El rol del personaje no se guarda como atributo,
+ * sino que lo determina la clase hija (Guerrero, Mago, etc.).
+ */
+
 /**
  * @author Antonio González Martel
  */
 
 public abstract class Personaje {
 
-    // ID único obligatorio
+    // ID único
     private final String id;
 
-    // Atributos comunes
     private String nombre;
-    private int nivel;
     private int salud;
-    private int PoderBase;
+    private int poderBase;
+    private String raza;
+    private int valorArmadura;
 
-    // Constructor
-    public Personaje(String nombre, int nivel, int salud) {
-        // Generamos un id único automáticamente
+    private Armas armaEquipada;
+
+    public Personaje(String nombre, int nivel, int salud, int poderBase,
+            String raza, int claseArmadura) {
+
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
-        this.nivel = nivel;
         this.salud = salud;
+        this.poderBase = poderBase;
+        this.raza = raza;
+        this.valorArmadura = claseArmadura;
     }
 
     // Getters
@@ -36,51 +50,95 @@ public abstract class Personaje {
         return nombre;
     }
 
-    public int getNivel() {
-        return nivel;
-    }
 
     public int getSalud() {
         return salud;
     }
 
     public int getPoderBase() {
-        return PoderBase;
+        return poderBase;
     }
 
-    // Setters (no hay setter de id porque no debe cambiar)
+    public String getRaza() {
+        return raza;
+    }
+
+    public int getValorArmadura() {
+        return valorArmadura;
+    }
+
+    public Armas getArmaEquipada() {
+        return armaEquipada;
+    }
+
+    // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public void setSalud(int salud) {
         this.salud = salud;
     }
 
-     public void setPoderBase(int PoderBase) {
-        this.PoderBase = PoderBase;
+    public void setValorArmadura(int valor){
+        this.valorArmadura = valor;
     }
 
-    // Método abstracto obligatorio.
-    // Cada clase hija tendrá que definir cómo ataca.
+    public void setPoderBase(int poderBase) {
+        this.poderBase = poderBase;
+    }
+
+    public void equiparArma(Armas arma) {
+        this.armaEquipada = arma;
+        System.out.println(nombre + " ha equipado " + arma.getNombre());
+    }
+
+    public void recibirDanio(int danio) {
+
+        int danioFinal = danio - valorArmadura;
+        if (danioFinal < 0)
+            danioFinal = 0;
+
+        this.salud -= danioFinal;
+        if (this.salud < 0)
+            this.salud = 0;
+
+        System.out.println(nombre + " recibe " + danioFinal + " de daño.");
+    }
+
+    public boolean estaVivo() {
+        return salud > 0;
+    }
+
+
+    // Cada personaje define como ataca
     public abstract void atacar(Personaje objetivo);
 
-    // toString para mostrar información del personaje
+    // Devuelve el rol según la clase hija.
+
+    public String getRol() {
+        return this.getClass().getSimpleName();
+    }
+
     @Override
     public String toString() {
-        return "ID: " + id +
-                " | Nombre: " + nombre +
-                " | Nivel: " + nivel +
-                " | Salud: " + salud +
-                " | Poder Base: " + PoderBase;
+        return "========== FICHA ==========" +
+                "\nID: " + id +
+                "\nNombre: " + nombre +
+                "\nRaza: " + raza +
+                "\nRol: " + getRol() +
+                "\nSalud: " + salud +
+                "\nPoder Base: " + poderBase +
+                "\nClase de Armadura: " + valorArmadura +
+                "\nArma equipada: " +
+                (armaEquipada != null ? armaEquipada.getNombre() : "Ninguna") +
+                "\nEstado: " + (estaVivo() ? "VIVO" : "DERROTADO") +
+                "\n===========================";
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null || getClass() != obj.getClass())
