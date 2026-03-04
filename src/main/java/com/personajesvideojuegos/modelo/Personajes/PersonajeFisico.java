@@ -2,6 +2,8 @@ package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Armas.Armas;
+import com.personajesvideojuegos.modelo.capacidades.Atacante;
+import com.personajesvideojuegos.modelo.capacidades.Defensor;
 
 /**
  * Clase abstracta intermedia para personajes físicos.
@@ -13,7 +15,7 @@ import com.personajesvideojuegos.modelo.Armas.Armas;
 /**
  * @author Antonio González Martel
  */
-public abstract class PersonajeFisico extends Personaje {
+public abstract class PersonajeFisico extends Personaje  {
 
     private int atributoFisico;
 
