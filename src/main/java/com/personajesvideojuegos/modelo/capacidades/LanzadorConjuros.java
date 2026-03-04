@@ -1,5 +1,6 @@
 package com.personajesvideojuegos.modelo.capacidades;
 
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 
 /**
@@ -11,4 +12,5 @@ public interface LanzadorConjuros {
     public int getMaximoMana();
     public void setMana(int mana);
     public void resetMana();
+    Ataque atacar();
 }
