@@ -3,12 +3,24 @@ package com.personajesvideojuegos.modelo.Personajes;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.Acciones.Ocultacion;
+import com.personajesvideojuegos.modelo.Pasivass.Pasiva;
+import com.personajesvideojuegos.modelo.Pasivass.clases.PicaroPasivas;
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.capacidades.Sigiloso;
 
+/**
+ * @author Gabriel Francisco Ruíz Bolaños*/
 public class Picaro extends PersonajeFisico implements Sigiloso {
     int destreza;
     boolean oculto;
+    private Pasiva pasiva;
+
+    public Picaro(String nombre, int salud, int poderBase, String raza, int atributoFisico) {
+        super(nombre, salud, poderBase, raza, atributoFisico);
+        this.destreza=atributoFisico;
+        this.oculto=false;
+        this.pasiva = new PicaroPasivas();
+    }
 
     public int getDestreza() {
         return destreza;
@@ -26,11 +38,7 @@ public class Picaro extends PersonajeFisico implements Sigiloso {
         this.oculto = oculto;
     }
 
-    public Picaro(String nombre, int salud, int poderBase, String raza, int atributoFisico) {
-        super(nombre, salud, poderBase, raza, atributoFisico);
-        this.destreza=atributoFisico;
-        this.oculto=false;
-    }
+
 
     @Override
     public Ataque atacar() {
@@ -52,7 +60,7 @@ public class Picaro extends PersonajeFisico implements Sigiloso {
 
 
     @Override
-    public Ocultacion Ocultarse() {
+    public Ocultacion ocultarse() {
         return new Ocultacion(this.destreza, this);
     }
 }

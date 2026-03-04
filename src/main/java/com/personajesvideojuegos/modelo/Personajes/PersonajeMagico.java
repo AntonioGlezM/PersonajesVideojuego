@@ -1,22 +1,28 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
+import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
+
 /**
  * @author Gabriel Francisco Ruiz Bolanos
  * */
-public abstract class PersonajeMagico extends Personaje {
+public abstract class PersonajeMagico extends Personaje implements LanzadorConjuros {
 
     private int mana;
-    private int inteligencia;
+    private int atributoMagico;
 
-    public PersonajeMagico(String nombre, int nivel, int salud, int poderBase,
+
+    public PersonajeMagico(String nombre, int salud, int poderBase,
                            String raza,
-                           int mana, int inteligencia) {
+                           int mana, int atributoMagico) {
 
-        super(nombre, nivel, salud, poderBase, raza, 0);
+        super(nombre, salud, poderBase, raza, 0);
         this.mana = mana;
-        this.inteligencia = inteligencia;
+        this.atributoMagico = atributoMagico;
     }
+
+
 
     public int getMana() {
         return mana;
@@ -26,6 +32,6 @@ public abstract class PersonajeMagico extends Personaje {
     }
 
     public int calcularDanioMagico(){
-        return this.getPoderBase() + inteligencia;
+        return this.getPoderBase() + atributoMagico;
     }
 }
