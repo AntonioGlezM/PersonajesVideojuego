@@ -5,9 +5,19 @@ import java.util.Scanner;
 
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Defensa;
+import com.personajesvideojuegos.modelo.Habilidades.Habilidad;
+import com.personajesvideojuegos.modelo.capacidades.Defensor;
 
 /**
- * Clase que controla la lógica del combate entre dos jugadores
+ * Controlador del combate PvP por turnos.
+ *
+ * Funcionalidades:
+ * - Sistema de iniciativa
+ * - Turnos alternos
+ * - Menú dinámico de habilidades según el personaje
+ * - Sistema de defensa con cooldown
+ * - Uso de consumibles
+ * 
  * @author Antonio Gonzalez Martel
  */
 public class Combate {
@@ -15,37 +25,55 @@ public class Combate {
     private Personaje jugador1;
     private Personaje jugador2;
 
-    private Random random;
-    private Scanner scanner;
+    private final Random random = new Random();
+    private final Scanner scanner = new Scanner(System.in);
 
+    // Contadores de turnos
     private int turnosJugador1 = 0;
     private int turnosJugador2 = 0;
 
-    // Último turno en el que cada jugador usó Defender
+    // Último turno en que se usó defensa (cooldown de 3 turnos)
     private int ultimoTurnoDefensaJ1 = -3;
     private int ultimoTurnoDefensaJ2 = -3;
 
-    public Combate(Personaje jugador1, Personaje jugador2) {
-        this.jugador1 = jugador1;
-        this.jugador2 = jugador2;
-        this.random = new Random();
-        this.scanner = new Scanner(System.in);
+   
+    public Combate() {
+        this.jugador1 = seleccionarPersonaje("Jugador 1");
+        this.jugador2 = seleccionarPersonaje("Jugador 2");
     }
 
     /**
-     * Método principal que inicia el combate.
+     * Permite al usuario seleccionar un personaje.
+     */
+    private Personaje seleccionarPersonaje(String jugador) {
+        System.out.println("=================================");
+        System.out.println(jugador + " - Selecciona personaje");
+        System.out.println("1 - Guerrero");
+        System.out.print("Opción: ");
+
+        int opcion = scanner.nextInt();
+
+        System.out.print("Nombre del personaje: ");
+        String nombre = scanner.next();
+
+        
+        return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
+                nombre, 120, 15, "Humano", 20, 10
+        );
+    }
+
+    /**
+     * Inicia el combate hasta que uno de los jugadores sea derrotado.
      */
     public void iniciarCombate() {
 
-        System.out.println("=================================");
-        System.out.println("        COMBATE ENTRE JUGADORES  ");
-        System.out.println("=================================");
+        System.out.println("\n========== COMBATE ==========");
 
-        // Cada personaje recibe sus consumibles iniciales
+        // Cada jugador recibe sus consumibles iniciales
         jugador1.cargarConsumiblesIniciales();
         jugador2.cargarConsumiblesIniciales();
 
-        // Se tira iniciativa para decidir quién empieza
+        // Tirada de iniciativa para decidir quién comienza
         Personaje atacante = tirarIniciativa();
         Personaje defensor = (atacante == jugador1) ? jugador2 : jugador1;
 
@@ -55,38 +83,37 @@ public class Combate {
         while (jugador1.estaVivo() && jugador2.estaVivo()) {
 
             System.out.println("\n=================================");
-            System.out.println("Turno de: " + atacante.getNombre());
+            System.out.println("Es el turno de " + atacante.getNombre());
             System.out.println("Salud actual: " + atacante.getSalud());
             System.out.println("=================================");
 
-            // Incrementamos el contador de turno del jugador que actúa
+            // Incrementar el contador de turnos del atacante
             if (atacante == jugador1) {
                 turnosJugador1++;
             } else {
                 turnosJugador2++;
             }
 
+            // Ejecutar la acción elegida por el atacante
             ejecutarTurno(atacante, defensor);
 
-            // Comprobamos si el defensor ha muerto
+            // Comprobar si el defensor ha muerto
             if (!defensor.estaVivo()) {
                 System.out.println("\n" + defensor.getNombre() + " ha sido derrotado.");
                 break;
             }
 
-            // Intercambio de roles
+            // Intercambiar roles: el defensor pasa a ser atacante
             Personaje temp = atacante;
             atacante = defensor;
             defensor = temp;
         }
 
-        System.out.println("\n=================================");
-        System.out.println("        FIN DEL COMBATE          ");
-        System.out.println("=================================");
+        System.out.println("\n========= FIN DEL COMBATE =========");
     }
 
     /**
-     * Ejecuta el turno de un jugador.
+     * Ejecuta la acción del jugador en su turno.
      */
     private void ejecutarTurno(Personaje atacante, Personaje defensor) {
 
@@ -101,68 +128,86 @@ public class Combate {
         switch (opcion) {
 
             case 1:
-                realizarAtaque(atacante, defensor);
+                // Menú dinámico de habilidades
+                menuHabilidades(atacante, defensor);
                 break;
 
             case 2:
+                // Usar defensa si el personaje tiene la capacidad
                 usarDefensa(atacante);
                 break;
 
             case 3:
+                // Usar un consumible del inventario
                 usarConsumible(atacante);
                 break;
 
             case 4:
-                System.out.println(atacante.getNombre() + " decide pasar el turno.");
+                System.out.println("Turno pasado.");
                 break;
 
             default:
-                System.out.println("Opción inválida. Pierdes el turno.");
+                System.out.println("Opción inválida.");
         }
     }
 
     /**
-     * Sistema de ataque con dado de 0 a 5:
-     * 0-1 = fallo
-     * 2-4 = golpe normal
-     * 5 = crítico
+     * Menú dinámico de habilidades del personaje.
+     * Se obtiene la lista de habilidades del atacante y se muestra.
      */
-    private void realizarAtaque(Personaje atacante, Personaje defensor) {
+    private void menuHabilidades(Personaje atacante, Personaje defensor) {
 
-        int dado = random.nextInt(6); // número entre 0 y 5
+        var habilidades = atacante.getHabilidades();
 
-        System.out.println("Se lanza el dado... Resultado: " + dado);
-
-        if (dado == 0 || dado == 1) {
-
-            System.out.println("¡ATAQUE FALLIDO!");
-
-        } else if (dado >= 2 && dado <= 4) {
-
-            System.out.println("¡Golpe exitoso!");
-            atacante.atacar(defensor);
-
-        } else if (dado == 5) {
-
-            System.out.println("¡¡IMPACTO CRÍTICO!!");
-
-            int saludAntes = defensor.getSalud();
-
-            // Ataque normal
-            atacante.atacar(defensor);
-
-            // Calculamos daño hecho
-            int danioHecho = saludAntes - defensor.getSalud();
-
-            // Aplicamos daño extra (doble daño)
-            defensor.recibirDanio(danioHecho);
-
-            System.out.println("Daño crítico aplicado.");
+        if (habilidades.isEmpty()) {
+            System.out.println("Este personaje no tiene habilidades.");
+            return;
         }
+
+        System.out.println("\n--- HABILIDADES ---");
+
+        for (int i = 0; i < habilidades.size(); i++) {
+            System.out.println((i + 1) + " - " + habilidades.get(i).getNombre()
+                    + " (Daño: " + habilidades.get(i).getDaño()
+                    + " | Coste: " + habilidades.get(i).getCoste() + ")");
+        }
+
+        System.out.print("Elige habilidad: ");
+        int opcion = scanner.nextInt();
+
+        if (opcion < 1 || opcion > habilidades.size()) {
+            System.out.println("Habilidad inválida.");
+            return;
+        }
+
+        var habilidadSeleccionada = habilidades.get(opcion - 1);
+
+        ejecutarHabilidad(atacante, defensor, habilidadSeleccionada);
     }
 
     /**
-     * Sistema de defensa con cooldown de 3 turnos propios.
+     * Ejecuta la habilidad seleccionada mostrando el daño real
+     * y la salud restante del defensor.
+     */
+    private void ejecutarHabilidad(Personaje atacante,
+                                   Personaje defensor,
+                                   Habilidad habilidad) {
+
+        System.out.println("Usando habilidad: " + habilidad.getNombre());
+
+        int saludAntes = defensor.getSalud();
+
+        defensor.recibirDanio(habilidad.getDaño());
+
+        int dañoReal = saludAntes - defensor.getSalud();
+
+        System.out.println("Daño causado: " + dañoReal);
+        System.out.println("Salud restante de " + defensor.getNombre() + ": " + defensor.getSalud());
+    }
+
+    /**
+     * Permite usar defensa si el personaje implementa Defensor.
+     * Incluye cooldown de 3 turnos.
      */
     private void usarDefensa(Personaje atacante) {
 
@@ -177,29 +222,23 @@ public class Combate {
             ultimoTurno = ultimoTurnoDefensaJ2;
         }
 
-        // Comprobamos si puede usar defender
         if (turnoActual - ultimoTurno < 3) {
-            System.out.println("No puedes defender todavía. Debes esperar "
-                    + (3 - (turnoActual - ultimoTurno)) + " turno(s).");
+            System.out.println("Defensa en cooldown.");
             return;
         }
 
-        // Verificamos que el personaje tenga capacidad de defensa
-        if (atacante instanceof com.personajesvideojuegos.modelo.capacidades.Defensor) {
+        if (atacante instanceof Defensor) {
 
-            Defensa defensa = ((com.personajesvideojuegos.modelo.capacidades.Defensor) atacante)
-                    .Defender();
-
+            Defensa defensa = ((Defensor) atacante).defender();
             defensa.realizarAccion(atacante);
 
-            System.out.println(atacante.getNombre() + " aumenta su armadura.");
-
-            // Guardamos turno en que defendió
             if (atacante == jugador1) {
                 ultimoTurnoDefensaJ1 = turnosJugador1;
             } else {
                 ultimoTurnoDefensaJ2 = turnosJugador2;
             }
+
+            System.out.println(atacante.getNombre() + " aumenta su defensa.");
 
         } else {
             System.out.println("Este personaje no puede defender.");
@@ -207,7 +246,7 @@ public class Combate {
     }
 
     /**
-     * Permite usar un consumible del inventario.
+     * Uso de consumibles.
      */
     private void usarConsumible(Personaje personaje) {
 
@@ -216,22 +255,20 @@ public class Combate {
             return;
         }
 
-        System.out.println("Inventario:");
-
         for (int i = 0; i < personaje.getInventario().size(); i++) {
             System.out.println(i + " - "
                     + personaje.getInventario().get(i).getNombre());
         }
 
-        System.out.print("Elige consumible: ");
+        System.out.print("Selecciona consumible: ");
         int index = scanner.nextInt();
 
         personaje.usarConsumible(index, personaje);
     }
 
     /**
-     * Sistema de iniciativa con dado de 20.
-     * Si empatan, vuelven a tirar.
+     * Tirada de iniciativa entre los dos jugadores.
+     * Retorna el jugador que comienza atacando.
      */
     private Personaje tirarIniciativa() {
 
@@ -241,13 +278,6 @@ public class Combate {
         do {
             dado1 = random.nextInt(20) + 1;
             dado2 = random.nextInt(20) + 1;
-
-            System.out.println(jugador1.getNombre() + " tira iniciativa: " + dado1);
-            System.out.println(jugador2.getNombre() + " tira iniciativa: " + dado2);
-
-            if (dado1 == dado2)
-                System.out.println("Empate. Se vuelve a tirar...\n");
-
         } while (dado1 == dado2);
 
         return (dado1 > dado2) ? jugador1 : jugador2;
