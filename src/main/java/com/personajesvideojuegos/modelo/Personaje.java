@@ -3,6 +3,7 @@ package com.personajesvideojuegos.modelo;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 
 /**
@@ -24,18 +25,20 @@ public abstract class Personaje {
 
     private String nombre;
     private int salud;
+    protected int saludMaxima;
     private int poderBase;
     private String raza;
     private int valorArmadura;
 
     private Armas armaEquipada;
 
-    public Personaje(String nombre, int nivel, int salud, int poderBase,
+    public Personaje(String nombre, int salud, int poderBase,
             String raza, int claseArmadura) {
 
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.salud = salud;
+        this.saludMaxima = salud;
         this.poderBase = poderBase;
         this.raza = raza;
         this.valorArmadura = claseArmadura;
@@ -53,6 +56,10 @@ public abstract class Personaje {
 
     public int getSalud() {
         return salud;
+    }
+
+    public int getSaludMaxima() {
+        return saludMaxima;
     }
 
     public int getPoderBase() {
@@ -77,7 +84,26 @@ public abstract class Personaje {
     }
 
     public void setSalud(int salud) {
+        if (salud < 0) {
+            this.salud = 0;
+            return;
+        }
+        if (salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+            return;
+        }
         this.salud = salud;
+    }
+
+    public void setSaludMaxima(int saludMaxima) {
+        if (saludMaxima < 0) {
+            this.saludMaxima = 0;
+        } else {
+            this.saludMaxima = saludMaxima;
+        }
+        if (this.salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+        }
     }
 
     public void setValorArmadura(int valor){
@@ -112,7 +138,7 @@ public abstract class Personaje {
 
 
     // Cada personaje define como ataca
-    public abstract void atacar(Personaje objetivo);
+    public abstract Ataque atacar();
 
     // Devuelve el rol según la clase hija.
 
@@ -127,7 +153,7 @@ public abstract class Personaje {
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nRol: " + getRol() +
-                "\nSalud: " + salud +
+                "\nSalud: " + salud + "/" + saludMaxima +
                 "\nPoder Base: " + poderBase +
                 "\nClase de Armadura: " + valorArmadura +
                 "\nArma equipada: " +
