@@ -25,6 +25,7 @@ public abstract class Personaje {
 
     private String nombre;
     private int salud;
+    protected int saludMaxima;
     private int poderBase;
     private String raza;
     private int valorArmadura;
@@ -37,6 +38,7 @@ public abstract class Personaje {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.salud = salud;
+        this.saludMaxima = salud;
         this.poderBase = poderBase;
         this.raza = raza;
         this.valorArmadura = claseArmadura;
@@ -54,6 +56,10 @@ public abstract class Personaje {
 
     public int getSalud() {
         return salud;
+    }
+
+    public int getSaludMaxima() {
+        return saludMaxima;
     }
 
     public int getPoderBase() {
@@ -78,7 +84,26 @@ public abstract class Personaje {
     }
 
     public void setSalud(int salud) {
+        if (salud < 0) {
+            this.salud = 0;
+            return;
+        }
+        if (salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+            return;
+        }
         this.salud = salud;
+    }
+
+    public void setSaludMaxima(int saludMaxima) {
+        if (saludMaxima < 0) {
+            this.saludMaxima = 0;
+        } else {
+            this.saludMaxima = saludMaxima;
+        }
+        if (this.salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+        }
     }
 
     public void setValorArmadura(int valor){
@@ -128,7 +153,7 @@ public abstract class Personaje {
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nRol: " + getRol() +
-                "\nSalud: " + salud +
+                "\nSalud: " + salud + "/" + saludMaxima +
                 "\nPoder Base: " + poderBase +
                 "\nClase de Armadura: " + valorArmadura +
                 "\nArma equipada: " +
