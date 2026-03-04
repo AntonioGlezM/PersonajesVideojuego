@@ -50,7 +50,6 @@ public abstract class Personaje {
         return nombre;
     }
 
-
     public int getSalud() {
         return salud;
     }
@@ -80,7 +79,7 @@ public abstract class Personaje {
         this.salud = salud;
     }
 
-    public void setValorArmadura(int valor){
+    public void setValorArmadura(int valor) {
         this.valorArmadura = valor;
     }
 
@@ -107,9 +106,8 @@ public abstract class Personaje {
     }
 
     public boolean estaVivo() {
-        return salud > 0;
+        return this.getSalud() > 0;
     }
-
 
     // Cada personaje define como ataca
     public abstract void atacar(Personaje objetivo);
