@@ -8,6 +8,7 @@ import com.personajesvideojuegos.modelo.Acciones.Defensa;
 
 /**
  * Clase que controla la lógica del combate entre dos jugadores
+ * @author Antonio Gonzalez Martel
  */
 public class Combate {
 
