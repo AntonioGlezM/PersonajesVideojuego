@@ -9,10 +9,12 @@ public abstract class Armas {
 
     protected String nombre;
     protected int danioBase;
+    protected CategoriaArma categoria;
 
-    public Armas(String nombre, int danioBase) {
+    public Armas(String nombre, int danioBase, CategoriaArma categoria) {
         this.nombre = nombre;
         this.danioBase = danioBase;
+        this.categoria = categoria;
     }
 
     public String getNombre() {
@@ -23,11 +25,33 @@ public abstract class Armas {
         return danioBase;
     }
 
-    // Cada arma calculará su propio daño
+    public CategoriaArma getCategoria() {
+        return categoria;
+    }
+
+    // Método común para calcular según categoría
+    protected int calcularBonusCategoria() {
+
+        switch (categoria) {
+            case RARA:
+                return 3;
+            case EPICA:
+                return 5;
+            case LEGENDARIA:
+                return 10;
+            case COMUN:
+            default:
+                return 0;
+        }
+    }
+
     public abstract int calcularDanio();
 
     @Override
     public String toString() {
-        return "Arma: " + nombre + " | Daño base: " + danioBase;
+        return "Arma: " + nombre +
+                " | Daño base: " + danioBase +
+                " | Categoría: " + categoria +
+                " | Daño total: " + calcularDanio();
     }
 }
