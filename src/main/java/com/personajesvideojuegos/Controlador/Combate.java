@@ -36,7 +36,6 @@ public class Combate {
     private int ultimoTurnoDefensaJ1 = -3;
     private int ultimoTurnoDefensaJ2 = -3;
 
-   
     public Combate() {
         this.jugador1 = seleccionarPersonaje("Jugador 1");
         this.jugador2 = seleccionarPersonaje("Jugador 2");
@@ -56,10 +55,8 @@ public class Combate {
         System.out.print("Nombre del personaje: ");
         String nombre = scanner.next();
 
-        
         return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
-                nombre, 120, 15, "Humano", 20, 10
-        );
+                nombre, 120, 15, "Humano", 20, 10);
     }
 
     /**
@@ -190,19 +187,70 @@ public class Combate {
      * y la salud restante del defensor.
      */
     private void ejecutarHabilidad(Personaje atacante,
-                                   Personaje defensor,
-                                   Habilidad habilidad) {
+            Personaje defensor,
+            Habilidad habilidad) {
+
+        // Comprobamos si el personaje que ataca es de tipo PersonajeMagico
+        // Esto es necesario porque solo los mágicos tienen sistema de mana.
+        boolean esMagico = atacante instanceof com.personajesvideojuegos.modelo.Personajes.PersonajeMagico;
+
+        // ==============================
+        // 1️⃣ SI ES MÁGICO → CONSUMIR MANA
+        // ==============================
+        if (esMagico) {
+
+            // Convertimos el objeto atacante a PersonajeMagico
+            // (Casting) para poder usar sus métodos específicos como usarMana().
+            var magico = (com.personajesvideojuegos.modelo.Personajes.PersonajeMagico) atacante;
+
+            // Intentamos gastar el mana necesario según el coste de la habilidad.
+            // El método usarMana() devuelve:
+            // - true → si hay suficiente mana (y lo resta)
+            // - false → si no hay suficiente mana
+            if (!magico.usarMana(habilidad.getCoste())) {
+
+                // Si no hay mana suficiente, se informa al jugador
+                System.out.println("No tienes suficiente mana.");
+
+                // Se termina el método aquí.
+                // La habilidad NO se ejecuta.
+                return;
+            }
+        }
+
+        // Aplica el daño
 
         System.out.println("Usando habilidad: " + habilidad.getNombre());
 
+        // Guardamos la salud del defensor antes de recibir daño
+        // Esto nos permite calcular el daño real aplicado.
         int saludAntes = defensor.getSalud();
 
+        // Aplicamos el daño de la habilidad al defensor
         defensor.recibirDanio(habilidad.getDaño());
 
+        // Calculamos el daño realmente recibido
+        // (puede variar si la armadura reduce parte del daño)
         int dañoReal = saludAntes - defensor.getSalud();
 
+        // Mostramos el daño final causado
         System.out.println("Daño causado: " + dañoReal);
-        System.out.println("Salud restante de " + defensor.getNombre() + ": " + defensor.getSalud());
+
+        // Mostramos la salud restante del defensor
+        System.out.println("Salud restante de " + defensor.getNombre() + ": "
+                + defensor.getSalud());
+
+        // ==============================
+        // 4️⃣ SI ES MÁGICO → MOSTRAR MANA
+        // ==============================
+        if (esMagico) {
+
+            // Volvemos a convertir el atacante a PersonajeMagico
+            var magico = (com.personajesvideojuegos.modelo.Personajes.PersonajeMagico) atacante;
+
+            // Mostramos el mana restante después de haber gastado el coste
+            System.out.println("Mana restante: " + magico.getMana());
+        }
     }
 
     /**
