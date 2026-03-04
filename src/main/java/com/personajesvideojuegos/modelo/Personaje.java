@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 import com.personajesvideojuegos.modelo.Consumibles.Consumibles;
 import com.personajesvideojuegos.modelo.Consumibles.PocionCuracion;
@@ -12,14 +13,14 @@ import com.personajesvideojuegos.modelo.Consumibles.PocionFuerza;
 import com.personajesvideojuegos.modelo.Consumibles.PocionMana;
 
 /**
- * Clase abstracta base para todos los personajes del juego.
+ * Clase abstracta inspirada en Dungeons & Dragons.
+ * Define atributos comunes a TODOS los personajes.
  * 
- * Define los atributos y comportamientos comunes que compartirán
- * todas las clases hijas (Guerrero, Mago, Arquero, etc.).
- * 
- * No se puede instanciar directamente.
- * Cada subclase debe implementar el método atacar().
- * 
+ * El rol del personaje no se guarda como atributo,
+ * sino que lo determina la clase hija (Guerrero, Mago, etc.).
+ */
+
+/**
  * @author Antonio González Martel
  */
 public abstract class Personaje {
@@ -29,8 +30,7 @@ public abstract class Personaje {
     private String nombre;
 
     private int salud;
-
-    // Daño base que realiza sin contar arma
+    protected int saludMaxima;
     private int poderBase;
 
     private String raza;
@@ -43,21 +43,20 @@ public abstract class Personaje {
 
     /**
      * Constructor principal del personaje.
-     * 
+     *
      * @param nombre        Nombre del personaje
      * @param salud         Vida inicial
      * @param poderBase     Daño base del personaje
      * @param raza          Raza del personaje
      * @param claseArmadura Valor de armadura
      */
-    public Personaje(String nombre, int nivel, int salud, int poderBase,
+    public Personaje(String nombre, int salud, int poderBase,
             String raza, int claseArmadura) {
 
-        // Genera un ID único
         this.id = UUID.randomUUID().toString();
-
         this.nombre = nombre;
         this.salud = salud;
+        this.saludMaxima = salud;
         this.poderBase = poderBase;
         this.raza = raza;
         this.valorArmadura = claseArmadura;
@@ -76,8 +75,13 @@ public abstract class Personaje {
         return nombre;
     }
 
+
     public int getSalud() {
         return salud;
+    }
+
+    public int getSaludMaxima() {
+        return saludMaxima;
     }
 
     public int getPoderBase() {
@@ -107,7 +111,27 @@ public abstract class Personaje {
     }
 
     public void setSalud(int salud) {
+        if (salud < 0) {
+            this.salud = 0;
+            return;
+        }
+        if (salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+            return;
+        }
         this.salud = salud;
+    }
+
+
+    public void setSaludMaxima(int saludMaxima) {
+        if (saludMaxima < 0) {
+            this.saludMaxima = 0;
+        } else {
+            this.saludMaxima = saludMaxima;
+        }
+        if (this.salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+        }
     }
 
     public void setValorArmadura(int valor) {
@@ -120,7 +144,7 @@ public abstract class Personaje {
 
     /**
      * Permite equipar un arma al personaje.
-     * 
+     *
      * @param arma Arma que se va a equipar
      */
     public void equiparArma(Armas arma) {
@@ -130,7 +154,7 @@ public abstract class Personaje {
 
     /**
      * Reduce la salud del personaje teniendo en cuenta su armadura.
-     * 
+     *
      * @param danio Daño recibido antes de aplicar armadura
      */
     public void recibirDanio(int danio) {
@@ -154,18 +178,16 @@ public abstract class Personaje {
 
     /**
      * Indica si el personaje sigue vivo.
-     * 
+     *
      * @return true si tiene salud mayor que 0
      */
     public boolean estaVivo() {
         return this.salud > 0;
     }
 
-    /**
-     * Método abstracto que cada clase hija debe implementar
-     * para definir su forma específica de atacar.
-     */
-    public abstract void atacar(Personaje objetivo);
+
+    // Cada personaje define como ataca
+    public abstract Ataque atacar();
 
     /**
      * Carga los consumibles iniciales al comenzar un combate.
@@ -187,7 +209,7 @@ public abstract class Personaje {
 
     /**
      * Permite usar un consumible del inventario.
-     * 
+     *
      * @param index    Posición del consumible
      * @param objetivo Personaje que recibirá el efecto
      */
@@ -224,7 +246,7 @@ public abstract class Personaje {
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nRol: " + getRol() +
-                "\nSalud: " + salud +
+                "\nSalud: " + salud + "/" + saludMaxima +
                 "\nPoder Base: " + poderBase +
                 "\nClase de Armadura: " + valorArmadura +
                 "\nArma equipada: " +

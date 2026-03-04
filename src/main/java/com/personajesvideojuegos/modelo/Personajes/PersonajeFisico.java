@@ -15,24 +15,24 @@ import com.personajesvideojuegos.modelo.Armas.Armas;
  */
 public abstract class PersonajeFisico extends Personaje {
 
-    private int fuerza;
+    private int atributoFisico;
 
-    public PersonajeFisico(String nombre, int nivel, int salud, int poderBase,
+    public PersonajeFisico(String nombre, int salud, int poderBase,
             String raza,
-            int fuerza) {
+            int atributoFisico) {
 
-        super(nombre, nivel, salud, poderBase, raza, 0);
-        this.fuerza = fuerza;
+        super(nombre, salud, poderBase, raza, 0);
+        this.atributoFisico = atributoFisico;
     }
 
     // Getter
-    public int getFuerza() {
-        return fuerza;
+    public int getatributoFisico() {
+        return atributoFisico;
     }
 
     // Setter
-    public void setFuerza(int fuerza) {
-        this.fuerza = fuerza;
+    public void setatributoFisico(int atributoFisico) {
+        this.atributoFisico = atributoFisico;
     }
 
     /**
@@ -41,7 +41,7 @@ public abstract class PersonajeFisico extends Personaje {
      */
     public int calcularDanioFisico() {
 
-        int danio = getPoderBase() + fuerza;
+        int danio = getPoderBase() + atributoFisico;
 
         Armas arma = getArmaEquipada();
 
