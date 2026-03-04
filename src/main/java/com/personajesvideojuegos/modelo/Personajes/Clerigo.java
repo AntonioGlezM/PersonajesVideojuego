@@ -26,7 +26,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         this.bendicion = atributoMagico;
         this.fe = fe;
         this.conjuros = new Conjuro[]{new Falsa_vida(), new Bola_de_fuego()};
-        this.pasivas = new ClerigoPasivas()
+        this.pasivas = new ClerigoPasivas();
     }
 
     @Override
@@ -40,6 +40,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
 
     @Override
     public Conjuro LanzarConjuro(int index) {
+        this.setMana(super.getMana() - 1);
         return this.conjuros[index];
     }
 
@@ -48,6 +49,10 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         return this.conjuros;
     }
 
+    @Override
+    public void resetMana() {
+        this.setMana(this.getMaximoMana());
+    }
 
     @Override
     public Curacion curar() {
@@ -63,4 +68,16 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
     public int getFe() {
         return this.fe;
     }
+
+    public int getBendicion() {
+        return bendicion;
+    }
+
+    public void setBendicion(int bendicion) {
+        this.bendicion = bendicion;
+    }
+
+
+
+
 }
