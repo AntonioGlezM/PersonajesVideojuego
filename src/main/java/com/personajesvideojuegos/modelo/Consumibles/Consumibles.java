@@ -1,13 +1,14 @@
 package com.personajesvideojuegos.modelo.Consumibles;
 
 import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Interfaces.Usable;
 
 /**
  * @author Antonio González Martel
  */
 
 // Clase para todos los consumibles
-public abstract class Consumibles {
+public abstract class Consumibles implements Usable{
 
     protected String nombre;
 
