@@ -1,6 +1,4 @@
-package com.personajesvideojuegos.modelo.conjuross;
-
-import com.personajesvideojuegos.modelo.Acciones.Accion;
+package com.personajesvideojuegos.modelo.Acciones;
 
 /**
  * @author Alonso J rodríguez Betancor

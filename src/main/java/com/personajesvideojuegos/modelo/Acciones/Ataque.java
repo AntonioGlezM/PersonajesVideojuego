@@ -2,6 +2,8 @@ package com.personajesvideojuegos.modelo.Acciones;
 
 import com.personajesvideojuegos.modelo.Personaje;
 
+/**
+ * @author Gabriel Francisco Ruíz Bolaños*/
 public class Ataque extends Accion {
     public Ataque(int valor) {
         super(valor);

@@ -1,5 +1,7 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
+import com.personajesvideojuegos.modelo.Acciones.Conjuro;
+
 /**
  * @author Alonso J rodríguez Betancor*/
 
