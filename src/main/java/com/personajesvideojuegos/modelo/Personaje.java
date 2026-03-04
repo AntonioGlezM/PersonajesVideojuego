@@ -3,6 +3,7 @@ package com.personajesvideojuegos.modelo;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 
 /**
@@ -30,7 +31,7 @@ public abstract class Personaje {
 
     private Armas armaEquipada;
 
-    public Personaje(String nombre, int nivel, int salud, int poderBase,
+    public Personaje(String nombre, int salud, int poderBase,
             String raza, int claseArmadura) {
 
         this.id = UUID.randomUUID().toString();
@@ -112,7 +113,7 @@ public abstract class Personaje {
 
 
     // Cada personaje define como ataca
-    public abstract void atacar(Personaje objetivo);
+    public abstract Ataque atacar();
 
     // Devuelve el rol según la clase hija.
 
