@@ -14,7 +14,7 @@ public class Ataque extends Accion {
         objetivo.setSalud(objetivo.getSalud() - noCero(this.getValor()));
     }
 
-    public int noCero(int valor){
+    private int noCero(int valor){
         return valor >= 0 ? valor : 0;
     }
 }
