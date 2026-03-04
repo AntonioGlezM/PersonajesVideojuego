@@ -1,10 +1,11 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Interfaces.Magico;
 /**
  * @author Gabriel Francisco Ruiz Bolanos
  * */
-public abstract class PersonajeMagico extends Personaje {
+public abstract class PersonajeMagico extends Personaje implements Magico {
 
     private int mana;
     private int inteligencia;
