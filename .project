@@ -20,6 +20,13 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/test/java</name>
+			<type>2</type>
+			<location>//C:/Users/alumnadoT/clase/PRO/Act Ev2 Juego/PersonajesVideojuego/src/test/java/</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1772058411829</id>

@@ -13,14 +13,14 @@ import com.personajesvideojuegos.modelo.Consumibles.PocionFuerza;
 import com.personajesvideojuegos.modelo.Consumibles.PocionMana;
 
 /**
- * Clase abstracta base para todos los personajes del juego.
+ * Clase abstracta inspirada en Dungeons & Dragons.
+ * Define atributos comunes a TODOS los personajes.
  * 
- * Define los atributos y comportamientos comunes que compartirán
- * todas las clases hijas (Guerrero, Mago, Arquero, etc.).
- *
- * No se puede instanciar directamente.
- * Cada subclase debe implementar el método atacar().
- *
+ * El rol del personaje no se guarda como atributo,
+ * sino que lo determina la clase hija (Guerrero, Mago, etc.).
+ */
+
+/**
  * @author Antonio González Martel
  */
 public abstract class Personaje {
@@ -30,8 +30,7 @@ public abstract class Personaje {
     private String nombre;
 
     private int salud;
-
-    // Daño base que realiza sin contar arma
+    protected int saludMaxima;
     private int poderBase;
 
     private String raza;
@@ -54,11 +53,10 @@ public abstract class Personaje {
     public Personaje(String nombre, int salud, int poderBase,
             String raza, int claseArmadura) {
 
-        // Genera un ID único
         this.id = UUID.randomUUID().toString();
-
         this.nombre = nombre;
         this.salud = salud;
+        this.saludMaxima = salud;
         this.poderBase = poderBase;
         this.raza = raza;
         this.valorArmadura = claseArmadura;
@@ -77,8 +75,13 @@ public abstract class Personaje {
         return nombre;
     }
 
+
     public int getSalud() {
         return salud;
+    }
+
+    public int getSaludMaxima() {
+        return saludMaxima;
     }
 
     public int getPoderBase() {
@@ -108,7 +111,27 @@ public abstract class Personaje {
     }
 
     public void setSalud(int salud) {
+        if (salud < 0) {
+            this.salud = 0;
+            return;
+        }
+        if (salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+            return;
+        }
         this.salud = salud;
+    }
+
+
+    public void setSaludMaxima(int saludMaxima) {
+        if (saludMaxima < 0) {
+            this.saludMaxima = 0;
+        } else {
+            this.saludMaxima = saludMaxima;
+        }
+        if (this.salud > this.saludMaxima) {
+            this.salud = this.saludMaxima;
+        }
     }
 
     public void setValorArmadura(int valor) {
@@ -223,7 +246,7 @@ public abstract class Personaje {
                 "\nNombre: " + nombre +
                 "\nRaza: " + raza +
                 "\nRol: " + getRol() +
-                "\nSalud: " + salud +
+                "\nSalud: " + salud + "/" + saludMaxima +
                 "\nPoder Base: " + poderBase +
                 "\nClase de Armadura: " + valorArmadura +
                 "\nArma equipada: " +
