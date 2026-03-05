@@ -1,66 +1,41 @@
-/*package com.personajesvideojuegos.modelo.Personajes;
+package com.personajesvideojuegos.modelo.Personajes;
 
-import com.personajesvideojuegos.modelo.Acciones.Ataque;
-import com.personajesvideojuegos.modelo.Acciones.Conjuro;
-import com.personajesvideojuegos.modelo.Acciones.Ocultacion;
-import com.personajesvideojuegos.modelo.Pasivass.Pasiva;
-import com.personajesvideojuegos.modelo.Pasivass.clases.PicaroPasivas;
 import com.personajesvideojuegos.modelo.Personaje;
-import com.personajesvideojuegos.modelo.capacidades.Sigiloso;
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
+import com.personajesvideojuegos.modelo.Habilidades.Habilidad;
 
 /**
- * @author Gabriel Francisco Ruíz Bolaños*/
-/*public class Picaro extends PersonajeFisico implements Sigiloso {
-    int destreza;
-    boolean oculto;
-    private Pasiva pasiva;
+ * Clase Picaro.
+ * Personaje rápido con ataques ágiles.
+ */
+public class Picaro extends PersonajeFisico {
 
-    public Picaro(String nombre, int salud, int poderBase, String raza, int atributoFisico) {
-        super(nombre, salud, poderBase, raza, atributoFisico);
-        this.destreza=atributoFisico;
-        this.oculto=false;
-        this.pasiva = new PicaroPasivas();
+    public Picaro(String nombre,
+            int salud,
+            int poderBase,
+            String raza,
+            int agilidad) {
+
+        super(nombre, salud, poderBase, raza, agilidad);
+
+        agregarHabilidad(new Habilidad(
+                "Puñalada Rápida",
+                20,
+                0));
+
+        agregarHabilidad(new Habilidad(
+                "Ataque Sombra",
+                35,
+                0));
+
+        agregarHabilidad(new Habilidad(
+                "Golpe Fantasma",
+                50,
+                0));
     }
-
-    public int getDestreza() {
-        return destreza;
-    }
-
-    public void setDestreza(int destreza) {
-        this.destreza = destreza;
-    }
-
-    public boolean isOculto() {
-        return oculto;
-    }
-
-    public void setOculto(boolean oculto) {
-        this.oculto = oculto;
-    }
-
-
 
     @Override
-    public Ataque atacar() {
-        if (this.oculto){
-            return ataqueFurtivo();
-        }else {
-            this.oculto=false;
-            int potencia = this.getArmaEquipada().calcularDanio() + this.getPoderBase();
-            return new Ataque(potencia);
-        }
-
+    public Ataque atacar(Personaje objetivo) {
+        return new Ataque(calcularDanioFisico());
     }
-
-    private Ataque ataqueFurtivo(){
-        this.oculto=false;
-        int potencia = (this.getArmaEquipada().calcularDanio() + this.getPoderBase())*2;
-        return new Ataque(potencia);
-    }
-
-
-    @Override
-    public Ocultacion ocultarse() {
-        return new Ocultacion(this.destreza, this);
-    }
-}*/
+}
