@@ -4,8 +4,8 @@ import com.personajesvideojuegos.excepciones.LimiteConjurosAlcanzadoException;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
-import com.personajesvideojuegos.modelo.conjuross.Bola_de_fuego;
-import com.personajesvideojuegos.modelo.conjuross.Falsa_vida;
+import com.personajesvideojuegos.modelo.conjuross.BoladeFuego;
+import com.personajesvideojuegos.modelo.conjuross.FalsaVida;
 
 import java.util.ArrayList;
 /***
@@ -26,8 +26,8 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
      * */
     public Mago(String nombre, int salud, int poderBase, String raza, int mana, int inteligencia) {
         this(nombre, salud, poderBase, raza, mana, inteligencia, 3);
-        this.aprenderConjuro(new Bola_de_fuego());
-        this.aprenderConjuro(new Falsa_vida());
+        this.aprenderConjuro(new BoladeFuego());
+        this.aprenderConjuro(new FalsaVida());
     }
 
     @Override

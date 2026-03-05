@@ -1,9 +1,12 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
 import com.personajesvideojuegos.modelo.Personaje;
+/**
+ * @author Alonso J rodríguez Betancor*/
 
-public class ManosArdiantes extends ConjuroDamage{
-    public ManosArdiantes(){
+
+public class ManosArdientes extends ConjuroDamage{
+    public ManosArdientes(){
         super(6,3,"Manos Ardientes","Sientes que esa canalizacion de fuegom se reparte por tus manos, y puedes extenderlos, lanzando a corta distancia en grupo");
     }
     @Override

@@ -1,4 +1,16 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
-public class BarreraArcana {
+import com.personajesvideojuegos.modelo.Personaje;
+/**
+ * @author Alonso J rodríguez Betancor*/
+
+
+public class BarreraArcana extends ConjuroSupport{
+    public BarreraArcana(){
+        super(3,7,"Barrera Arcana","Con esa sensación deseas proteger a un aliado, haciendo una protección",TipoConjuroSupport.DEFENSA);
+    }
+    @Override
+    public void realizarAccion(Personaje objetivo){
+        objetivo.setSalud(objetivo.getSalud()+this.getValor());
+    }
 }

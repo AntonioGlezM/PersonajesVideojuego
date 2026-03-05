@@ -5,9 +5,9 @@ import com.personajesvideojuegos.modelo.Personaje;
 /**
  * @author Alonso J rodríguez Betancor*/
 
-public class Falsa_vida extends ConjuroSupport{
+public class FalsaVida extends ConjuroSupport{
 
-    public Falsa_vida (){
+    public FalsaVida(){
         super(5, 0, "Falsa vida", "Le adjudicas una vida que no existe", TipoConjuroSupport.CURACION);
     }
 

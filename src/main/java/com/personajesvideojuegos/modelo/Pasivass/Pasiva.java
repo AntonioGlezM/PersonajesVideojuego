@@ -1,5 +1,6 @@
 package com.personajesvideojuegos.modelo.Pasivass;
 
+import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Rasgo;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public abstract class Pasiva implements Rasgo {
     public List<Pasiva> getClasePasivas() {
         return clasePasivas;
     }
+
+
 }
