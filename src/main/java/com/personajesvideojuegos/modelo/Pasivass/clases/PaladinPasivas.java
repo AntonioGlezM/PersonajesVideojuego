@@ -11,3 +11,4 @@ public class PaladinPasivas extends Pasiva {
     }
 
 }
+//Esto son pasivas, que debido a no tener más tiempo, se hubiese implementaod

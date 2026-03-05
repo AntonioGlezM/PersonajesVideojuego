@@ -10,3 +10,4 @@ public class ClerigoPasivas extends Pasiva {
         agregarclasePasiva(new Pasiva("A1", "Lanzamiento de conjuros Divinos", "Usas tu sabiduría para poder lanzar conjuros de tu bendición"){});
     }
 }
+//Esto son pasivas, que debido a no tener más tiempo, se hubiese implementaod

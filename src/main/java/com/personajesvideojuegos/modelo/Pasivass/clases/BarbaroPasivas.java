@@ -10,3 +10,4 @@ public class BarbaroPasivas extends Pasiva {
         agregarclasePasiva(new Pasiva("E1", "IRA", "Resistencia al daño fisico y daño extra cuerpo a cuerpo"){});
     }
 }
+//Esto son pasivas, que debido a no tener más tiempo, se hubiese implementaod

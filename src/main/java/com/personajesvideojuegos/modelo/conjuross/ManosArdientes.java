@@ -1,18 +1,14 @@
 package com.personajesvideojuegos.modelo.conjuross;
 
 import com.personajesvideojuegos.modelo.Personaje;
-
 /**
  * @author Alonso J rodríguez Betancor*/
 
-public class Bola_de_fuego extends ConjuroDamage{
 
-    public Bola_de_fuego (){
-        super(7, 1, "Bola de fuego", "Canalizas una energia que se hace en una bola de fuego");
-
+public class ManosArdientes extends ConjuroDamage{
+    public ManosArdientes(){
+        super(6,3,"Manos Ardientes","Sientes que esa canalizacion de fuegom se reparte por tus manos, y puedes extenderlos, lanzando a corta distancia en grupo");
     }
-
-
     @Override
     public void realizarAccion(Personaje objetivo){
         objetivo.setSalud(objetivo.getSalud()-noCero(this.getValor()));
@@ -21,5 +17,4 @@ public class Bola_de_fuego extends ConjuroDamage{
     public int noCero(int valor){
         return valor >= 0 ? valor : 0;
     }
-
 }
