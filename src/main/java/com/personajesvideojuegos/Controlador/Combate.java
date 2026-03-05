@@ -45,9 +45,16 @@ public class Combate {
      * Permite al usuario seleccionar un personaje.
      */
     private Personaje seleccionarPersonaje(String jugador) {
+
         System.out.println("=================================");
         System.out.println(jugador + " - Selecciona personaje");
         System.out.println("1 - Guerrero");
+        System.out.println("2 - Asesino");
+        System.out.println("3 - Barbaro");
+        System.out.println("4 - Clerigo");
+        System.out.println("5 - Mago");
+        System.out.println("6 - Paladin");
+        System.out.println("7 - Picaro");
         System.out.print("Opción: ");
 
         int opcion = scanner.nextInt();
@@ -55,8 +62,41 @@ public class Combate {
         System.out.print("Nombre del personaje: ");
         String nombre = scanner.next();
 
-        return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
-                nombre, 120, 15, "Humano", 20, 10);
+        switch (opcion) {
+
+            case 1:
+                return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
+                        nombre, 120, 15, "Humano", 20, 10);
+
+            case 2:
+                return new com.personajesvideojuegos.modelo.Personajes.Asesino(
+                        nombre, 90, 18, "Humano", 25);
+
+            case 3:
+                return new com.personajesvideojuegos.modelo.Personajes.Barbaro(
+                        nombre, 150, 20, "Orco", 30);
+
+            case 4:
+                return new com.personajesvideojuegos.modelo.Personajes.Clerigo(
+                        nombre, 100, 12, "Humano", 25, 100, 10);
+
+            case 5:
+                return new com.personajesvideojuegos.modelo.Personajes.Mago(
+                        nombre, 80, 10, "Humano", 30, 120);
+
+            case 6:
+                return new com.personajesvideojuegos.modelo.Personajes.Paladin(
+                        nombre, 130, 14, "Humano", 18, 80);
+
+            case 7:
+                return new com.personajesvideojuegos.modelo.Personajes.Picaro(
+                        nombre, 95, 16, "Humano", 22);
+
+            default:
+                System.out.println("Opción no válida. Se asigna Guerrero por defecto.");
+                return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
+                        nombre, 120, 15, "Humano", 20, 10);
+        }
     }
 
     /**
