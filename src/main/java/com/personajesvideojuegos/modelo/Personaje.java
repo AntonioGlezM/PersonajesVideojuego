@@ -95,14 +95,21 @@ public abstract class Personaje {
     }
 
     public int getValorArmadura() {
-        return valorArmadura;
+        
+        int defensaTotal = valorArmadura;
+
+        if (armaduraEquipada != null) {
+            defensaTotal += armaduraEquipada.calcularDefensa();
+        }
+
+        return defensaTotal;
     }
 
     public Armas getArmaEquipada() {
         return armaEquipada;
     }
 
-    public Armas getArmaduraEquipada() {
+    public Armadura getArmaduraEquipada() {
         return armaduraEquipada;
     }
 
@@ -171,7 +178,7 @@ public abstract class Personaje {
     public void recibirDanio(int danio) {
 
         // Se resta la armadura al daño recibido
-        int danioFinal = danio - (valorArmadura + calcularDefensa);
+        int danioFinal = danio - getValorArmadura();
 
         // Evita daño negativo
         if (danioFinal < 0)

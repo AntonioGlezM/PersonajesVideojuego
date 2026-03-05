@@ -5,11 +5,11 @@ package com.personajesvideojuegos.modelo.Armadura;
  * @author Carlos Perdomo Morales
  */
 
-public class Malla extends Armadura {
+public class Cuero extends Armadura {
 
     private CategoriaArmadura categoria;
 
-    public Malla(String nombre, int defensaBase, CategoriaArmadura categoria) {
+    public Cuero(String nombre, int defensaBase, CategoriaArmadura categoria) {
         super(nombre, defensaBase);
         this.categoria = categoria;
     }
