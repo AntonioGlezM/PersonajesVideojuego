@@ -2,7 +2,6 @@ package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.excepciones.LimiteConjurosAlcanzadoException;
 import com.personajesvideojuegos.modelo.Armas.ArmaMagica;
-import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
@@ -23,6 +22,7 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
         super(nombre, salud, poderBase, raza, mana, inteligencia);
         this.inteligencia = inteligencia;
         this.maestriaMagica = maestriaMagica;
+        this.conjuros = new ArrayList<>();
     }
     /**
      * El constructor recomendado para personajes nuevos es este,
@@ -88,4 +88,3 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
     }
 
 }
-

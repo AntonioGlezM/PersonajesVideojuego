@@ -1,14 +1,11 @@
 package com.personajesvideojuegos.modelo.Pasivass;
 
-import com.personajesvideojuegos.modelo.Personaje;
-import com.personajesvideojuegos.modelo.Rasgo;
-
 import java.util.List;
 import java.util.ArrayList;
 
 /**
  * @author Alonso J rodríguez Betancor*/
-public abstract class Pasiva implements Rasgo {
+public abstract class Pasiva {
     private String ID;
     private String titulo;
     private String descrip;

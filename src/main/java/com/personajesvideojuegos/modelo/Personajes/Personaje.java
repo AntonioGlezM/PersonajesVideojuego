@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo;
+package com.personajesvideojuegos.modelo.Personajes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,6 +151,11 @@ public abstract class Personaje {
 
     public void setPoderBase(int poderBase) {
         this.poderBase = poderBase;
+    }
+
+    public void equiparArma(Armas arma) {
+        this.armaEquipada = arma;
+        System.out.println(nombre + " ha equipado " + arma.getNombre() + ".");
     }
 
     // ============================

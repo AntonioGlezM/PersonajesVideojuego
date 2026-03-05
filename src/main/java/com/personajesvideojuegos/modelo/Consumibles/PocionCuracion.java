@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Consumibles;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 
 /**
  * @author Antonio González Martel
@@ -17,8 +17,11 @@ public class PocionCuracion extends Consumibles {
 
     @Override
     public void usar(Personaje personaje) {
+        int saludAntes = personaje.getSalud();
         personaje.setSalud(personaje.getSalud() + cantidadCuracion);
+        int saludDespues = personaje.getSalud();
         System.out.println(personaje.getNombre() +
-                " ha recuperado " + cantidadCuracion + " puntos de salud.");
+                " consume " + getNombre() +
+                " | Salud: " + saludAntes + " -> " + saludDespues + ".");
     }
 }

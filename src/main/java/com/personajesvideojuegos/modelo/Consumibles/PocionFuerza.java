@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Consumibles;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 
 /**
  * @author Antonio González Martel
@@ -17,8 +17,11 @@ public class PocionFuerza extends Consumibles {
 
     @Override
     public void usar(Personaje personaje) {
+        int poderAntes = personaje.getPoderBase();
         personaje.setPoderBase(personaje.getPoderBase() + cantidadFuerza);
+        int poderDespues = personaje.getPoderBase();
         System.out.println(personaje.getNombre() + 
-            " ha conseguido " + cantidadFuerza + " puntos de Fuerza extra.");
+            " consume " + getNombre() +
+            " | Poder Base: " + poderAntes + " -> " + poderDespues + ".");
     }
 }

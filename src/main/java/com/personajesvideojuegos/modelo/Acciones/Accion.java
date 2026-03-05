@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Acciones;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 
 /**
  * @author Gabriel Francisco Ruiz Bolaños*/

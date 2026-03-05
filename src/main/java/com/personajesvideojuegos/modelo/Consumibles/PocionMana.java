@@ -1,7 +1,7 @@
 package com.personajesvideojuegos.modelo.Consumibles;
 
-import com.personajesvideojuegos.modelo.Personaje;
-import com.personajesvideojuegos.modelo.Interfaces.Magico;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
+import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 
 /**
  * @author Antonio González Martel
@@ -19,19 +19,23 @@ public class PocionMana extends Consumibles {
     @Override
     public void usar(Personaje personaje) {
 
-        if (personaje instanceof Magico) {
+        if (personaje instanceof LanzadorConjuros lanzadorConjuros) {
 
-            Magico magico = (Magico) personaje;
-
-            magico.setMana(magico.getMana() + cantidadMana);
+            int manaAntes = lanzadorConjuros.getMana();
+            int manaDespues = manaAntes + cantidadMana;
+            if (manaDespues > lanzadorConjuros.getMaximoMana()) {
+                manaDespues = lanzadorConjuros.getMaximoMana();
+            }
+            lanzadorConjuros.setMana(manaDespues);
 
             System.out.println(personaje.getNombre()
-                    + " ha recuperado " + cantidadMana + " de maná.");
+                    + " consume " + getNombre()
+                    + " | Mana: " + manaAntes + " -> " + manaDespues + ".");
 
         } else {
 
             System.out.println(personaje.getNombre()
-                    + " no puede usar maná.");
+                    + " no usa mana. " + getNombre() + " no tiene efecto.");
         }
     }
 }

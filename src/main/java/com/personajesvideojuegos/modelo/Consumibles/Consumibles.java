@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Consumibles;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 import com.personajesvideojuegos.modelo.Interfaces.Usable;
 
 /**

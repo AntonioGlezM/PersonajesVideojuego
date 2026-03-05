@@ -3,7 +3,7 @@ package com.personajesvideojuegos.Controlador;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Defensa;
 import com.personajesvideojuegos.modelo.Habilidades.Habilidad;
 import com.personajesvideojuegos.modelo.capacidades.Defensor;

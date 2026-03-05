@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Acciones;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños*/
@@ -11,6 +11,7 @@ public class Ataque extends Accion {
 
     @Override
     public void realizarAccion(Personaje objetivo) {
+        System.out.println("Se ejecuta Accion: Ataque sobre " + objetivo.getNombre() + ".");
         objetivo.setSalud(objetivo.getSalud() - noCero(this.getValor()));
     }
 

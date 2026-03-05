@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Acciones;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 import com.personajesvideojuegos.modelo.Personajes.Picaro;
 /**
  * @author Gabriel Francisco Ruiz Bolaños
@@ -13,6 +13,7 @@ public class Ocultacion extends Accion {
     }
     @Override
     public void realizarAccion(Personaje personaje) {
+        System.out.println("Se ejecuta Accion: Ocultacion sobre " + personaje.getNombre() + ".");
         Picaro obj = (Picaro)personaje;
         obj.setValorArmadura(obj.getValorArmadura() + obj.getDestreza());
         obj.setOculto(true);

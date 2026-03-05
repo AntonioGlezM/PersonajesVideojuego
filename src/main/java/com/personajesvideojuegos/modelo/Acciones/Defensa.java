@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Acciones;
 
-import com.personajesvideojuegos.modelo.Personaje;
+import com.personajesvideojuegos.modelo.Personajes.Personaje;
 
 
 /**
@@ -14,6 +14,7 @@ public class Defensa extends Accion {
 
     @Override
     public void realizarAccion(Personaje objetivo) {
+        System.out.println("Se ejecuta Accion: Defensa sobre " + objetivo.getNombre() + ".");
         objetivo.setValorArmadura(objetivo.getValorArmadura() + this.getValor());
 
     }

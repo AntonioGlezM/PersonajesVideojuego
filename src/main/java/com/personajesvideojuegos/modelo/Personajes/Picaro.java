@@ -1,11 +1,9 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
-import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.Acciones.Ocultacion;
 import com.personajesvideojuegos.modelo.Pasivass.Pasiva;
 import com.personajesvideojuegos.modelo.Pasivass.clases.PicaroPasivas;
-import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.capacidades.Sigiloso;
 
 /**

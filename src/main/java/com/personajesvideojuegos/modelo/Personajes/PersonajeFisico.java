@@ -1,6 +1,5 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
-import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 
 /**
