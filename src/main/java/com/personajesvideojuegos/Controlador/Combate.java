@@ -65,32 +65,44 @@ public class Combate {
         switch (opcion) {
 
             case 1:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
-                        nombre, 120, 15, "Humano", 20, 10);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
+                 * nombre, 120, 15, "Humano", 20, 10);
+                 */
 
             case 2:
                 return new com.personajesvideojuegos.modelo.Personajes.Asesino(
                         nombre, 90, 18, "Humano", 25);
 
             case 3:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Barbaro(
-                        nombre, 150, 20, "Orco", 30);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Barbaro(
+                 * nombre, 150, 20, "Orco", 30);
+                 */
 
             case 4:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Clerigo(
-                        nombre, 100, 12, "Humano", 25, 100, 10);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Clerigo(
+                 * nombre, 100, 12, "Humano", 25, 100, 10);
+                 */
 
             case 5:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Mago(
-                        nombre, 80, 10, "Humano", 30, 120);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Mago(
+                 * nombre, 80, 10, "Humano", 30, 120);
+                 */
 
             case 6:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Paladin(
-                        nombre, 130, 14, "Humano", 18, 80);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Paladin(
+                 * nombre, 130, 14, "Humano", 18, 80);
+                 */
 
             case 7:
-                /*return new com.personajesvideojuegos.modelo.Personajes.Picaro(
-                        nombre, 95, 16, "Humano", 22);*/
+                /*
+                 * return new com.personajesvideojuegos.modelo.Personajes.Picaro(
+                 * nombre, 95, 16, "Humano", 22);
+                 */
 
             default:
                 System.out.println("Opción no válida. Se asigna Guerrero por defecto.");
@@ -262,12 +274,45 @@ public class Combate {
 
         System.out.println("Usando habilidad: " + habilidad.getNombre());
 
+        
+    int dado = random.nextInt(6); // 0-5
+
+    if (dado == 0 || dado == 1) {
+
+        System.out.println("El ataque ha FALLADO.");
+        return;
+    }
+
+    // ==============================
+    // 3️⃣ CALCULAR DAÑO BASE
+    // ==============================
+
+    int dañoTotal = habilidad.getDaño();
+
+    // Si el personaje es físico añadimos su daño físico
+    if (atacante instanceof com.personajesvideojuegos.modelo.Personajes.PersonajeFisico) {
+
+        var fisico = (com.personajesvideojuegos.modelo.Personajes.PersonajeFisico) atacante;
+        dañoTotal += fisico.calcularDanioFisico();
+    }
+
+    
+    // CRÍTICO
+    
+
+    if (dado == 5) {
+
+        System.out.println("¡GOLPE CRÍTICO!");
+
+        dañoTotal = (int) (dañoTotal * 1.5); // 50% más daño
+    }
+
         // Guardamos la salud del defensor antes de recibir daño
         // Esto nos permite calcular el daño real aplicado.
         int saludAntes = defensor.getSalud();
 
         // Aplicamos el daño de la habilidad al defensor
-        defensor.recibirDanio(habilidad.getDaño());
+        defensor.recibirDanio(dañoTotal);
 
         // Calculamos el daño realmente recibido
         // (puede variar si la armadura reduce parte del daño)
