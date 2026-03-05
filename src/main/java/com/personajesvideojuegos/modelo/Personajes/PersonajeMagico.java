@@ -1,6 +1,6 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
-import com.personajesvideojuegos.modelo.Acciones.Conjuro;
+
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 
