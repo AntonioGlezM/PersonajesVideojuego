@@ -17,7 +17,7 @@ import com.personajesvideojuegos.modelo.capacidades.Defensor;
  * - Menú dinámico de habilidades según el personaje
  * - Sistema de defensa con cooldown
  * - Uso de consumibles
- * 
+ *
  * @author Antonio Gonzalez Martel
  */
 public class Combate {
