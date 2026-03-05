@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Defensa;
@@ -10,7 +10,7 @@ import com.personajesvideojuegos.modelo.capacidades.Sacerdotal;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños*/
-public class Paladin extends PersonajeFisico implements Defensor, Sacerdotal {
+/*public class Paladin extends PersonajeFisico implements Defensor, Sacerdotal {
     int fuerza;
     int fe;
     private Pasiva pasivas;
@@ -45,4 +45,4 @@ public class Paladin extends PersonajeFisico implements Defensor, Sacerdotal {
     public int getFe() {
         return this.fe;
     }
-}
+}*/

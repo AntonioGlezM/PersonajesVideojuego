@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.excepciones.LimiteConjurosAlcanzadoException;
 import com.personajesvideojuegos.modelo.Personaje;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /***
  * @author Gabriel Francisco Ruíz Bolaños
  */
-public class Mago extends PersonajeMagico implements LanzadorConjuros {
+/*public class Mago extends PersonajeMagico implements LanzadorConjuros {
     private int inteligencia;
     private int maestriaMagica;
     private ArrayList<Conjuro> conjuros;
@@ -26,7 +26,7 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
      * El constructor recomendado para personajes nuevos es este,
      *  ya que establece la maestría mágica desde el inicio así como algunos conjuros iniciales
      * */
-    public Mago(String nombre, int salud, int poderBase, String raza, int mana, int inteligencia) {
+    /*public Mago(String nombre, int salud, int poderBase, String raza, int mana, int inteligencia) {
         this(nombre, salud, poderBase, raza, mana, inteligencia, 3);
         this.aprenderConjuro(new Bola_de_fuego());
         this.aprenderConjuro(new Falsa_vida());
@@ -85,5 +85,5 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
         throw new UnsupportedOperationException("Unimplemented method 'atacar'");
     }
 
-}
+}*/
 

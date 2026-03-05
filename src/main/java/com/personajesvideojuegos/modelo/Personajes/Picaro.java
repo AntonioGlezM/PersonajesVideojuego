@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
@@ -10,7 +10,7 @@ import com.personajesvideojuegos.modelo.capacidades.Sigiloso;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños*/
-public class Picaro extends PersonajeFisico implements Sigiloso {
+/*public class Picaro extends PersonajeFisico implements Sigiloso {
     int destreza;
     boolean oculto;
     private Pasiva pasiva;
@@ -63,4 +63,4 @@ public class Picaro extends PersonajeFisico implements Sigiloso {
     public Ocultacion ocultarse() {
         return new Ocultacion(this.destreza, this);
     }
-}
+}*/

@@ -1,11 +1,11 @@
-package com.personajesvideojuegos.modelo.Acciones;
+/*package com.personajesvideojuegos.modelo.Acciones;
 
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Personajes.Picaro;
 /**
  * @author Gabriel Francisco Ruiz Bolaños
  */
-public class Ocultacion extends Accion {
+/*public class Ocultacion extends Accion {
     Personaje personaje;
     public Ocultacion(int destreza, Personaje personaje) {
         super(destreza);
@@ -21,4 +21,4 @@ public class Ocultacion extends Accion {
     public void realizarAccion() {
         this.realizarAccion(this.personaje);
     }
-}
+}*/

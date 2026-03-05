@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
@@ -14,8 +14,8 @@ import com.personajesvideojuegos.modelo.conjuross.Falsa_vida;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños
- * */
-public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros, Sacerdotal {
+ */
+/*public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros, Sacerdotal {
     private int bendicion;
     private int fe;
     private Conjuro[] conjuros;
@@ -25,7 +25,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         super(nombre, salud, poderBase, raza, mana, atributoMagico);
         this.bendicion = atributoMagico;
         this.fe = fe;
-        this.conjuros = new Conjuro[]{new Falsa_vida(), new Bola_de_fuego()};
+        this.conjuros = new Conjuro[] { new Falsa_vida(), new Bola_de_fuego() };
         this.pasivas = new ClerigoPasivas();
     }
 
@@ -34,7 +34,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         return new Ataque(1);
     }
 
-    public Curacion medicoDeLosDioses(){
+    public Curacion medicoDeLosDioses() {
         return new Curacion(this.fe + this.bendicion);
     }
 
@@ -56,7 +56,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
 
     @Override
     public Curacion curar() {
-       return new Curacion(this.fe);
+        return new Curacion(this.fe);
     }
 
     @Override
@@ -77,7 +77,4 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         this.bendicion = bendicion;
     }
 
-
-
-
-}
+}*/

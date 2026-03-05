@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.capacidades.Atacante;
@@ -38,4 +38,4 @@ public class Barbaro extends PersonajeFisico implements Atacante {
     public void enojarse(){
         this.ira = 5;
     }
-}
+}*/

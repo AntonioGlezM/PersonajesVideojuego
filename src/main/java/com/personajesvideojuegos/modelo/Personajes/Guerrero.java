@@ -1,4 +1,4 @@
-package com.personajesvideojuegos.modelo.Personajes;
+/*package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Defensa;
@@ -36,4 +36,4 @@ public class Guerrero extends PersonajeFisico implements Atacante, Defensor {
     public Defensa defender() {
         return new Defensa(this.maestriaCombate);
     }
-}
+}*/
