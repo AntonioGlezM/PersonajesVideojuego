@@ -26,12 +26,12 @@ public abstract class PersonajeFisico extends Personaje {
     }
 
     // Getter
-    public int getatributoFisico() {
+    public int getAtributoFisico() {
         return atributoFisico;
     }
 
     // Setter
-    public void setatributoFisico(int atributoFisico) {
+    public void setAtributoFisico(int atributoFisico) {
         this.atributoFisico = atributoFisico;
     }
 

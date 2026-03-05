@@ -1,6 +1,7 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.excepciones.LimiteConjurosAlcanzadoException;
+import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
@@ -22,7 +23,8 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
         this.maestriaMagica = maestriaMagica;
     }
     /**
-     * El constructor recomendado para personajes nuevos es este, ya que establece la maestría mágica desde el inicio así como algunos conjuros iniciales
+     * El constructor recomendado para personajes nuevos es este,
+     *  ya que establece la maestría mágica desde el inicio así como algunos conjuros iniciales
      * */
     public Mago(String nombre, int salud, int poderBase, String raza, int mana, int inteligencia) {
         this(nombre, salud, poderBase, raza, mana, inteligencia, 3);
@@ -76,6 +78,11 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
     }
     public void setInteligencia(int inteligencia) {
         this.inteligencia = inteligencia;
+    }
+    @Override
+    public Ataque atacar(Personaje objetivo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'atacar'");
     }
 
 }

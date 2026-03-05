@@ -1,26 +1,33 @@
 package com.personajesvideojuegos.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Armas.Armas;
+import com.personajesvideojuegos.modelo.Consumibles.Consumibles;
+import com.personajesvideojuegos.modelo.Consumibles.PocionCuracion;
+import com.personajesvideojuegos.modelo.Consumibles.PocionFuerza;
+import com.personajesvideojuegos.modelo.Consumibles.PocionMana;
+import com.personajesvideojuegos.modelo.Habilidades.Habilidad;
 
 /**
- * Clase abstracta inspirada en Dungeons & Dragons.
- * Define atributos comunes a TODOS los personajes.
+ * Clase abstracta base de todos los personajes.
+ *
+ * Ahora incluye:
+ * - Sistema de habilidades
+ * - Inventario de consumibles
+ * - Sistema de combate
+ *
+ * Las clases hijas (Guerrero, Mago, etc.)
+ * serán las encargadas de definir sus habilidades.
  * 
- * El rol del personaje no se guarda como atributo,
- * sino que lo determina la clase hija (Guerrero, Mago, etc.).
+ * @author Antonio Gonzalez Martel
  */
-
-/**
- * @author Antonio González Martel
- */
-
 public abstract class Personaje {
 
-    // ID único
     private final String id;
 
     private String nombre;
@@ -28,9 +35,16 @@ public abstract class Personaje {
     protected int saludMaxima;
     private int poderBase;
     private String raza;
+
     private int valorArmadura;
 
     private Armas armaEquipada;
+
+    // Inventario de consumibles
+    private List<Consumibles> inventario;
+
+    // Lista de habilidades del personaje
+    private List<Habilidad> habilidades;
 
     public Personaje(String nombre, int salud, int poderBase,
             String raza, int claseArmadura) {
@@ -42,9 +56,16 @@ public abstract class Personaje {
         this.poderBase = poderBase;
         this.raza = raza;
         this.valorArmadura = claseArmadura;
+
+        // Inicialización de listas
+        this.inventario = new ArrayList<>();
+        this.habilidades = new ArrayList<>();
     }
 
-    // Getters
+    // ============================
+    // GETTERS
+    // ============================
+
     public String getId() {
         return id;
     }
@@ -52,7 +73,6 @@ public abstract class Personaje {
     public String getNombre() {
         return nombre;
     }
-
 
     public int getSalud() {
         return salud;
@@ -78,35 +98,54 @@ public abstract class Personaje {
         return armaEquipada;
     }
 
-    // Setters
+    public List<Consumibles> getInventario() {
+        return inventario;
+    }
+
+    /**
+     * Devuelve la lista de habilidades del personaje.
+     */
+    public List<Habilidad> getHabilidades() {
+        return habilidades;
+    }
+
+    // ============================
+    // SETTERS
+    // ============================
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     public void setSalud(int salud) {
+
         if (salud < 0) {
             this.salud = 0;
             return;
         }
+
         if (salud > this.saludMaxima) {
             this.salud = this.saludMaxima;
             return;
         }
+
         this.salud = salud;
     }
 
     public void setSaludMaxima(int saludMaxima) {
+
         if (saludMaxima < 0) {
             this.saludMaxima = 0;
         } else {
             this.saludMaxima = saludMaxima;
         }
+
         if (this.salud > this.saludMaxima) {
             this.salud = this.saludMaxima;
         }
     }
 
-    public void setValorArmadura(int valor){
+    public void setValorArmadura(int valor) {
         this.valorArmadura = valor;
     }
 
@@ -114,18 +153,39 @@ public abstract class Personaje {
         this.poderBase = poderBase;
     }
 
-    public void equiparArma(Armas arma) {
-        this.armaEquipada = arma;
-        System.out.println(nombre + " ha equipado " + arma.getNombre());
+    // ============================
+    // HABILIDADES
+    // ============================
+
+    /**
+     * Permite añadir una habilidad al personaje.
+     * Se usará en las clases hijas (Guerrero, Mago, etc.).
+     */
+    public void agregarHabilidad(Habilidad habilidad) {
+        this.habilidades.add(habilidad);
     }
 
+    // ============================
+    // COMBATE
+    // ============================
+
+    /**
+     * Método abstracto que define cómo ataca cada personaje.
+     */
+    public abstract Ataque atacar(Personaje objetivo);
+
+    /**
+     * Reduce la salud teniendo en cuenta la armadura.
+     */
     public void recibirDanio(int danio) {
 
         int danioFinal = danio - valorArmadura;
+
         if (danioFinal < 0)
             danioFinal = 0;
 
         this.salud -= danioFinal;
+
         if (this.salud < 0)
             this.salud = 0;
 
@@ -133,33 +193,40 @@ public abstract class Personaje {
     }
 
     public boolean estaVivo() {
-        return salud > 0;
+        return this.salud > 0;
     }
 
+    // ============================
+    // INVENTARIO
+    // ============================
 
-    // Cada personaje define como ataca
-    public abstract Ataque atacar();
+    public void cargarConsumiblesIniciales() {
 
-    // Devuelve el rol según la clase hija.
+        inventario.clear();
+
+        inventario.add(new PocionCuracion("Poción de Curación", 30));
+        inventario.add(new PocionMana("Poción de Maná", 20));
+        inventario.add(new PocionFuerza("Poción de Fuerza", 10));
+
+        System.out.println(nombre + " recibe consumibles iniciales.");
+    }
+
+    public void usarConsumible(int index, Personaje objetivo) {
+
+        if (index < 0 || index >= inventario.size()) {
+            System.out.println("Consumible inválido.");
+            return;
+        }
+
+        Consumibles consumible = inventario.get(index);
+
+        consumible.usar(objetivo);
+
+        inventario.remove(index);
+    }
 
     public String getRol() {
         return this.getClass().getSimpleName();
-    }
-
-    @Override
-    public String toString() {
-        return "========== FICHA ==========" +
-                "\nID: " + id +
-                "\nNombre: " + nombre +
-                "\nRaza: " + raza +
-                "\nRol: " + getRol() +
-                "\nSalud: " + salud + "/" + saludMaxima +
-                "\nPoder Base: " + poderBase +
-                "\nClase de Armadura: " + valorArmadura +
-                "\nArma equipada: " +
-                (armaEquipada != null ? armaEquipada.getNombre() : "Ninguna") +
-                "\nEstado: " + (estaVivo() ? "VIVO" : "DERROTADO") +
-                "\n===========================";
     }
 
     @Override
@@ -167,8 +234,10 @@ public abstract class Personaje {
 
         if (this == obj)
             return true;
+
         if (obj == null || getClass() != obj.getClass())
             return false;
+
         Personaje that = (Personaje) obj;
         return id.equals(that.id);
     }
