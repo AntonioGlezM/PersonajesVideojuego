@@ -9,8 +9,7 @@ import com.personajesvideojuegos.modelo.Pasivass.clases.ClerigoPasivas;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 import com.personajesvideojuegos.modelo.capacidades.Medico;
 import com.personajesvideojuegos.modelo.capacidades.Sacerdotal;
-import com.personajesvideojuegos.modelo.conjuross.BoladeFuego;
-import com.personajesvideojuegos.modelo.conjuross.FalsaVida;
+import com.personajesvideojuegos.modelo.conjuross.*;
 
 /**
  * @author Gabriel Francisco Ruíz Bolaños
@@ -25,7 +24,7 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
         super(nombre, salud, poderBase, raza, mana, atributoMagico);
         this.bendicion = atributoMagico;
         this.fe = fe;
-        this.conjuros = new Conjuro[]{new FalsaVida(), new BoladeFuego()};
+        this.conjuros = new Conjuro[]{new CuradeFe(), new Bendecir(), new Paralisis(), new Relampago()};
         this.pasivas = new ClerigoPasivas();
     }
 

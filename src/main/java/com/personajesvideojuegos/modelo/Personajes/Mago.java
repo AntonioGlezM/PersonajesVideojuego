@@ -8,6 +8,7 @@ import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 import com.personajesvideojuegos.modelo.conjuross.BoladeFuego;
 import com.personajesvideojuegos.modelo.conjuross.FalsaVida;
+import com.personajesvideojuegos.modelo.conjuross.MisilMagico;
 
 import java.util.ArrayList;
 /***
@@ -31,6 +32,7 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
         this(nombre, salud, poderBase, raza, mana, inteligencia, 3);
         this.aprenderConjuro(new BoladeFuego());
         this.aprenderConjuro(new FalsaVida());
+        this.aprenderConjuro(new MisilMagico());
     }
 
 
