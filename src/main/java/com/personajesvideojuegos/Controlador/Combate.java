@@ -3,8 +3,12 @@ package com.personajesvideojuegos.Controlador;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.personajesvideojuegos.modelo.Acciones.Ataque;
+import com.personajesvideojuegos.modelo.Acciones.Conjuro;
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Defensa;
+import com.personajesvideojuegos.modelo.capacidades.Defensor;
+import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 
 /**
  * Clase que controla la lógica del combate entre dos jugadores
@@ -116,6 +120,9 @@ public class Combate {
                 System.out.println(atacante.getNombre() + " decide pasar el turno.");
                 break;
 
+            case 5:
+                lanzarConjuro(atacante, defensor);
+
             default:
                 System.out.println("Opción inválida. Pierdes el turno.");
         }
@@ -140,22 +147,19 @@ public class Combate {
         } else if (dado >= 2 && dado <= 4) {
 
             System.out.println("¡Golpe exitoso!");
-            atacante.atacar(defensor);
+            Ataque ataque = atacante.atacar();
+            ataque.realizarAccion(defensor);
 
         } else if (dado == 5) {
 
             System.out.println("¡¡IMPACTO CRÍTICO!!");
 
-            int saludAntes = defensor.getSalud();
 
             // Ataque normal
-            atacante.atacar(defensor);
 
-            // Calculamos daño hecho
-            int danioHecho = saludAntes - defensor.getSalud();
-
-            // Aplicamos daño extra (doble daño)
-            defensor.recibirDanio(danioHecho);
+            Ataque ataque = atacante.atacar();
+            ataque.setValor(ataque.getValor()*2);
+            ataque.realizarAccion(defensor);
 
             System.out.println("Daño crítico aplicado.");
         }
@@ -187,8 +191,7 @@ public class Combate {
         // Verificamos que el personaje tenga capacidad de defensa
         if (atacante instanceof com.personajesvideojuegos.modelo.capacidades.Defensor) {
 
-            Defensa defensa = ((com.personajesvideojuegos.modelo.capacidades.Defensor) atacante)
-                    .Defender();
+            Defensa defensa = ((Defensor) atacante).defender();
 
             defensa.realizarAccion(atacante);
 
@@ -251,5 +254,62 @@ public class Combate {
         } while (dado1 == dado2);
 
         return (dado1 > dado2) ? jugador1 : jugador2;
+    }
+
+    public void lanzarConjuro(Personaje lanzador, Personaje objetivo) {
+
+        if (lanzador instanceof LanzadorConjuros){
+
+            LanzadorConjuros lanzadorConjuros = (LanzadorConjuros)lanzador;
+
+            int dado = random.nextInt(6);
+
+            System.out.println("Se lanza el dado... Resultado: " + dado);
+
+            if (dado == 0 || dado == 1) {
+
+                System.out.println("¡CONJURO FALLIDO!");
+
+            } else if (dado >= 2 && dado <= 4) {
+
+                System.out.println("¡Conjuro exitoso!");
+                Conjuro conjuro = lanzadorConjuros.LanzarConjuro(seleccionarConjuro(lanzadorConjuros));
+                conjuro.realizarAccion(objetivo);
+
+            } else if (dado == 5) {
+
+                System.out.println("¡¡IMPACTO CRÍTICO!!");
+
+
+
+
+                Conjuro conjuro = lanzadorConjuros.LanzarConjuro(seleccionarConjuro(lanzadorConjuros));
+                conjuro.setValor(conjuro.getValor()*2);
+                conjuro.realizarAccion(objetivo);
+
+                System.out.println("Daño crítico aplicado.");
+            }
+        }
+
+    }
+
+    public int seleccionarConjuro(LanzadorConjuros lanzador){
+        try{
+            Conjuro[] conjuros = lanzador.getConjuros();
+            for (int i = 0; i < conjuros.length; i++) {
+                System.out.println("Selecciona un conjuro:");
+                System.out.println(i + " - " + conjuros[i].toString());
+            }
+            int index = scanner.nextInt();
+            if(index >= 0 && index < conjuros.length){
+                return index;
+            }
+            return -1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+
+
     }
 }
