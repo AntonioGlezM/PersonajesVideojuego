@@ -172,7 +172,7 @@ public abstract class Personaje {
     /**
      * Método abstracto que define cómo ataca cada personaje.
      */
-    public abstract Ataque atacar(Personaje objetivo);
+    public abstract Ataque atacar();
 
     /**
      * Reduce la salud teniendo en cuenta la armadura.

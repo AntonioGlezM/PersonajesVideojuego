@@ -3,6 +3,9 @@ package com.personajesvideojuegos.modelo.Personajes;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.capacidades.Atacante;
 
+/**
+ * @author Gabriel Francisco Ruíz Bolaños*/
+
 public class Barbaro extends PersonajeFisico implements Atacante {
     private int fuerza;
     private int ira;

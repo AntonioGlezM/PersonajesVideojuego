@@ -5,6 +5,9 @@ import com.personajesvideojuegos.modelo.Acciones.Defensa;
 import com.personajesvideojuegos.modelo.capacidades.Atacante;
 import com.personajesvideojuegos.modelo.capacidades.Defensor;
 
+
+/**
+ * @author Gabriel Francisco Ruíz Bolaños*/
 public class Guerrero extends PersonajeFisico implements Atacante, Defensor {
     int fuerza;
     int maestriaCombate;

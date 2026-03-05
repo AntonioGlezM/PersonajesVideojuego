@@ -59,7 +59,7 @@ public class Asesino extends PersonajeFisico {
      * Usa el cálculo físico heredado.
      */
     @Override
-    public Ataque atacar(Personaje objetivo) {
+    public Ataque atacar() {
 
         return new Ataque(calcularDanioFisico());
     }

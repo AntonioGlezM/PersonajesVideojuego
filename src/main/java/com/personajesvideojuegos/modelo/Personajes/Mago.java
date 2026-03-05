@@ -1,6 +1,7 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
 import com.personajesvideojuegos.excepciones.LimiteConjurosAlcanzadoException;
+import com.personajesvideojuegos.modelo.Armas.ArmaMagica;
 import com.personajesvideojuegos.modelo.Personaje;
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Acciones.Conjuro;
@@ -32,6 +33,8 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
         this.aprenderConjuro(new Falsa_vida());
     }
 
+
+
     @Override
     public Ataque atacar() {
         return new Ataque(1);
@@ -39,7 +42,9 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
 
     @Override
     public Conjuro LanzarConjuro(int index) {
-        return this.conjuros.get(index);
+        Conjuro conjuro = conjuros.get(index);
+        conjuro.setValor(conjuro.getValor() + ((ArmaMagica)this.getArmaEquipada()).calcularDanio());
+        return conjuro;
     }
 
     @Override
@@ -78,11 +83,6 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
     }
     public void setInteligencia(int inteligencia) {
         this.inteligencia = inteligencia;
-    }
-    @Override
-    public Ataque atacar(Personaje objetivo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atacar'");
     }
 
 }
