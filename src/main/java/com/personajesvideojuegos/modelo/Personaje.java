@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
 import com.personajesvideojuegos.modelo.Armas.Armas;
+import com.personajesvideojuegos.modelo.Armadura.Armadura;
 import com.personajesvideojuegos.modelo.Consumibles.Consumibles;
 import com.personajesvideojuegos.modelo.Consumibles.PocionCuracion;
 import com.personajesvideojuegos.modelo.Consumibles.PocionFuerza;
@@ -38,6 +39,7 @@ public abstract class Personaje {
     private int valorArmadura;
 
     private Armas armaEquipada;
+    private Armadura armaduraEquipada;
 
     private List<Consumibles> inventario;
 
@@ -100,6 +102,10 @@ public abstract class Personaje {
         return armaEquipada;
     }
 
+    public Armas getArmaduraEquipada() {
+        return armaduraEquipada;
+    }
+
     public List<Consumibles> getInventario() {
         return inventario;
     }
@@ -152,6 +158,11 @@ public abstract class Personaje {
         System.out.println(nombre + " ha equipado " + arma.getNombre());
     }
 
+    public void equiparArmadura(Armadura armadura) {
+        this.armaduraEquipada = armadura;
+        System.out.println(nombre + " ha equipado " + armadura.getNombre());
+    }
+
     /**
      * Reduce la salud del personaje teniendo en cuenta su armadura.
      *
@@ -160,7 +171,7 @@ public abstract class Personaje {
     public void recibirDanio(int danio) {
 
         // Se resta la armadura al daño recibido
-        int danioFinal = danio - valorArmadura;
+        int danioFinal = danio - (valorArmadura + calcularDefensa);
 
         // Evita daño negativo
         if (danioFinal < 0)
