@@ -40,7 +40,9 @@ public class Clerigo extends PersonajeMagico implements Medico, LanzadorConjuros
     @Override
     public Conjuro LanzarConjuro(int index) {
         this.setMana(super.getMana() - 1);
-        return this.conjuros[index];
+        Conjuro conjuro = conjuros[index];
+        conjuro.setValor(conjuro.getValor() + this.calcularDanioMagico());
+        return conjuro;
     }
 
     @Override

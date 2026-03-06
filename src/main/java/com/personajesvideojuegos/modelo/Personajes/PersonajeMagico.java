@@ -1,6 +1,7 @@
 package com.personajesvideojuegos.modelo.Personajes;
 
 
+import com.personajesvideojuegos.modelo.Armas.ArmaMagica;
 import com.personajesvideojuegos.modelo.capacidades.LanzadorConjuros;
 
 /**
@@ -35,7 +36,13 @@ public abstract class PersonajeMagico extends Personaje implements LanzadorConju
     }
 
     public int calcularDanioMagico() {
-        return this.getPoderBase() + atributoMagico;
+        try{
+
+            return this.getPoderBase() + atributoMagico + ((ArmaMagica)this.getArmaEquipada()).calcularDanio();
+        } catch (Exception e){
+            return this.getPoderBase()+atributoMagico;
+        }
+
     }
 
      /**

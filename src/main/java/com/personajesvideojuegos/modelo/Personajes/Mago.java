@@ -44,8 +44,9 @@ public class Mago extends PersonajeMagico implements LanzadorConjuros {
 
     @Override
     public Conjuro LanzarConjuro(int index) {
+        this.setMana(super.getMana() - 1);
         Conjuro conjuro = conjuros.get(index);
-        conjuro.setValor(conjuro.getValor() + ((ArmaMagica)this.getArmaEquipada()).calcularDanio());
+        conjuro.setValor(conjuro.getValor() + this.calcularDanioMagico());
         return conjuro;
     }
 
