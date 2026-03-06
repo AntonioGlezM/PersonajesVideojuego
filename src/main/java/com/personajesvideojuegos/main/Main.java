@@ -1,5 +1,6 @@
 package com.personajesvideojuegos.main;
 
+import com.personajesvideojuegos.Vista.Consola;
 import com.personajesvideojuegos.modelo.Acciones.Accion;
 import com.personajesvideojuegos.modelo.Personajes.Personaje;
 import com.personajesvideojuegos.modelo.Personajes.Clerigo;
@@ -43,7 +44,7 @@ public class Main {
         Mago mago = new Mago("Merik", 8, 3, "Tiefling", 8, 7);
         Clerigo clerigo = new Clerigo("Iria", 10, 3, "Humano", 7, 6, 6);
 
-        barbaro.equiparArma(new Hacha("Hacha de guerra", 6,  CategoriaArma.RARA));
+        barbaro.equiparArma(new Hacha("Hacha de guerra", 6, CategoriaArma.RARA));
         guerrero.equiparArma(new Espada("Espada larga", 5, CategoriaArma.RARA));
         paladin.equiparArma(new Martillo("Martillo sagrado", 5, CategoriaArma.EPICA));
         picaro.equiparArma(new Arco("Arco corto", 4, CategoriaArma.COMUN));
@@ -89,5 +90,12 @@ public class Main {
         for (int i = 0; i < acciones.size(); i++) {
             acciones.get(i).realizarAccion(personajes.get(i));
         }
+
+         // Crear la vista
+        Consola vista = new Consola();
+
+        // Mostrar el menú principal
+        vista.mostrarMenu();
     }
-}
+    }
+
