@@ -1,4 +1,5 @@
 package com.personajesvideojuegos.modelo.Personajes;
+import com.personajesvideojuegos.modelo.Armadura.Armadura;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +7,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.personajesvideojuegos.modelo.Acciones.Ataque;
+import com.personajesvideojuegos.modelo.Armadura.Armadura;
 import com.personajesvideojuegos.modelo.Armas.Armas;
 import com.personajesvideojuegos.modelo.Consumibles.Consumibles;
 import com.personajesvideojuegos.modelo.Consumibles.PocionCuracion;
@@ -39,6 +41,8 @@ public abstract class Personaje {
     private int valorArmadura;
 
     private Armas armaEquipada;
+    private Armadura armaduraEquipada;
+    
 
     // Inventario de consumibles
     private List<Consumibles> inventario;
@@ -91,7 +95,14 @@ public abstract class Personaje {
     }
 
     public int getValorArmadura() {
-        return valorArmadura;
+        
+        int defensaTotal = valorArmadura;
+
+        if (armaduraEquipada != null) {
+            defensaTotal += armaduraEquipada.calcularDefensa();
+        }
+
+        return defensaTotal;
     }
 
     public Armas getArmaEquipada() {
@@ -157,7 +168,15 @@ public abstract class Personaje {
         this.armaEquipada = arma;
         System.out.println(nombre + " ha equipado " + arma.getNombre() + ".");
     }
+    public void equiparArmadura(Armadura armadura){
+    this.armaduraEquipada = armadura;
 
+    if (armadura != null) {
+        this.valorArmadura = armadura.calcularDefensa();
+    }
+
+    System.out.println(nombre + " ha equipado " + armadura.getNombre());
+}
     // ============================
     // HABILIDADES
     // ============================
@@ -179,24 +198,50 @@ public abstract class Personaje {
      */
     public abstract Ataque atacar();
 
+    public int calcularDefensa() {
+
+        int defensa = 0;
+
+        if (armaduraEquipada != null)
+            defensa += armaduraEquipada.calcularDefensa();
+
+        return defensa;
+    }
+
     /**
      * Reduce la salud teniendo en cuenta la armadura.
      */
     public void recibirDanio(int danio) {
 
-        int danioFinal = danio - valorArmadura;
+    int defensa = 0;
 
-        if (danioFinal < 0)
-            danioFinal = 0;
-
-        this.salud -= danioFinal;
-
-        if (this.salud < 0)
-            this.salud = 0;
-
-        System.out.println(nombre + " recibe " + danioFinal + " de daño.");
+    if (armaduraEquipada != null) {
+        defensa = armaduraEquipada.calcularDefensa();
     }
 
+    int danioFinal = danio - defensa;
+
+    if (danioFinal < 0)
+        danioFinal = 0;
+
+    this.salud -= danioFinal;
+
+    if (this.salud < 0)
+        this.salud = 0;
+
+    System.out.println(nombre + " recibe " + danioFinal + " de daño.");
+}
+
+public int calcularDanioAtaque() {
+
+    int danio = poderBase;
+
+    if (armaEquipada != null) {
+        danio += armaEquipada.getDanioBase();
+    }
+
+    return danio;
+}
     public boolean estaVivo() {
         return this.salud > 0;
     }

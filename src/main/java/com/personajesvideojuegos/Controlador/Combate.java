@@ -71,7 +71,6 @@ public class Combate {
             case 2:
                 return new com.personajesvideojuegos.modelo.Personajes.Asesino(
                         nombre, 90, 18, "Humano", 25);
-
             case 3:
                 return new com.personajesvideojuegos.modelo.Personajes.Barbaro(
                         nombre, 150, 20, "Orco", 30);
@@ -97,6 +96,7 @@ public class Combate {
                 return new com.personajesvideojuegos.modelo.Personajes.Guerrero(
                         nombre, 120, 15, "Humano", 20, 10);
         }
+        
     }
 
     /**
@@ -235,7 +235,7 @@ public class Combate {
         boolean esMagico = atacante instanceof com.personajesvideojuegos.modelo.Personajes.PersonajeMagico;
 
         // ==============================
-        // 1️⃣ SI ES MÁGICO → CONSUMIR MANA
+        // SI ES MÁGICO → CONSUMIR MANA
         // ==============================
         if (esMagico) {
 
@@ -281,7 +281,7 @@ public class Combate {
                 + defensor.getSalud());
 
         // ==============================
-        // 4️⃣ SI ES MÁGICO → MOSTRAR MANA
+        //  SI ES MÁGICO → MOSTRAR MANA
         // ==============================
         if (esMagico) {
 
